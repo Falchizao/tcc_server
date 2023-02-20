@@ -1,0 +1,38 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    enviroment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  api:
+    container_name: api
+    image: maven:3.8.3-openjdk-17
+    working_dir: /home/java/app
+    restart: always
+    command: ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    volumes:
+      - .././:home/java/app
+    ports:
+      - "8081:8081"
+      - "5005:5005"
+    networks:
+      - postgres
+    depends_on:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
