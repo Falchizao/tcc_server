@@ -7,9 +7,12 @@ import io.scarletgraph.api.generic.IController;
 import io.scarletgraph.api.repository.UserRepository;
 import io.scarletgraph.api.service.CRUD.UserCRUDService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
@@ -17,17 +20,24 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@Slf4j
 @RequestMapping("/user")
 public class UserController extends IController<UserResponse, ResponseEntity<?>, UserRequest> {
 
     private final ModelMapper modelMapper;
-    private final UserRepository userRepository;
     private final UserCRUDService userCRUDService;
 
-    public UserController (UserRepository userRepository, UserCRUDService userCRUDService) {
+    public UserController (UserCRUDService userCRUDService) {
         this.modelMapper = new ModelMapper();
-        this.userRepository = userRepository;
         this.userCRUDService = userCRUDService;
+    }
+
+    @PostMapping("/type")
+    public ResponseEntity<?> setUserType(@RequestBody Long type){
+        log.info("error");
+        //userCRUDService.setUserType(type, httpServletRequest.getUserPrincipal().getName());
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
