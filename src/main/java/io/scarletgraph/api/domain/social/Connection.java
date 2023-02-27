@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name = "tb_connection")
+@Table(name = "connection")
 public class Connection extends IModel {
 
     @Column(name = "connection_date")

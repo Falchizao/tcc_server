@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name = "tb_post")
+@Table(name = "post")
 public class Post extends IModel {
 
     @ManyToOne(fetch = FetchType.EAGER)
