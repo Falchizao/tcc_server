@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @jakarta.persistence.Entity
 @Table(name = "tb_user")
@@ -13,10 +14,8 @@ public class User extends IModel  {
 
     @Getter
     @Setter
-    private String uid;
-
-    @Getter
-    @Setter
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
 
     @Column(name = "email")
@@ -41,6 +40,7 @@ public class User extends IModel  {
     String lastName;
 
     @Enumerated
+    @Setter
     @Column(name = "type")
     private Role role;
 
@@ -48,5 +48,4 @@ public class User extends IModel  {
     @Setter
     @Size(min = 8, max = 100)
     String password;
-
 }

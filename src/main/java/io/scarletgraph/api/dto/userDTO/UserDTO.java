@@ -1,17 +1,16 @@
 package io.scarletgraph.api.dto.userDTO;
 
 import io.scarletgraph.api.enums.Role;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Enumerated;
 
 public class UserDTO {
 
     @Getter
     @Setter
-    private String uid;
+    private Long id;
 
     @Getter
     @Setter
