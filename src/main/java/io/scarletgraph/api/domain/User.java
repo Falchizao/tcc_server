@@ -4,11 +4,14 @@ import io.scarletgraph.api.enums.Role;
 import io.scarletgraph.api.generic.IModel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @jakarta.persistence.Entity
 @Table(name = "tb_user")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class User extends IModel  {
 
     @Getter
