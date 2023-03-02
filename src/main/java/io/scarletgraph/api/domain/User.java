@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-@jakarta.persistence.Entity
-@Table(name = "tb_user")
+@jakarta.persistence.Entity(name = "tb_user")
+@Table(uniqueConstraints = @UniqueConstraint(name = "setuniquename", columnNames = "username"))
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,10 +33,12 @@ public class User extends IModel  {
 
     @Column(name = "first_name")
     @Getter
+    @Size(min = 4, max = 20)
     @Setter
     String firstName;
 
     @Column(name = "last_name")
+    @Size(min = 4, max = 20)
     @Getter
     @Setter
     String lastName;
