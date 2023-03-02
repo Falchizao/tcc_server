@@ -1,0 +1,2 @@
+INSERT INTO profile(description) VALUES ('boilerplate')
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('marcelo@gmail.com', 'Marcelo', 'Falchi', 'a', 1, 'falchi', 1)
