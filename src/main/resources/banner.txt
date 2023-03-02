@@ -1,0 +1,16 @@
+${AnsiColor.YELLOW} * **   ** ***  * *             * **   ** ***  * *              * **   ** ***  * * * **   ** ***  * *
+${AnsiColor.YELLOW}* *  **   *    *   ***         * *  **   *    *   ***      * *  **   *    *   ***  * *  **   *    *   ***
+${AnsiColor.YELLOW}                 *                 *                 *                 *                 *                 *
+${AnsiColor.YELLOW} *       *      * * *       *      * * *       *      * * *       *      * * *       *      * * *       *      * *
+${AnsiColor.YELLOW}                                *                               *                           *                 *
+${AnsiColor.YELLOW}   * *    **  * *    **   * *    **    * *    **    * *    **  * *    **  * *    **     * *    **   * *    **
+${AnsiColor.YELLOW}*                          *                           *                       *                       *
+${AnsiColor.YELLOW}    *          * *    *          * *    *          * *    *          * *    *          * *    *          * *
+${AnsiColor.YELLOW}      * *            *      * *            *      * *            *      * *            *      * *
+${AnsiColor.YELLOW}
+${AnsiColor.YELLOW}            *            *            *            *            *            *            *            *
+${AnsiColor.YELLOW}  *          *     ** *          *     ** *          *     ** *          *     ** *          *     **
+${AnsiColor.GREEN}  Marcelo Falchi Navarro RA 2297787
+${AnsiColor.MAGENTA} Scarlet_graph
+${application.title} ${application.version}
+Powered by Spring Boot ${spring-boot.version}
