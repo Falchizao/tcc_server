@@ -28,13 +28,11 @@ public class User extends IModel  {
     @Column(name = "email")
     @Getter
     @Setter
-    @UniqueEmail
     String email;
 
     @Column(name = "username")
     @Getter
     @Setter
-    @UniqueUsername
     @Size(min = 6, max = 20)
     String username;
 

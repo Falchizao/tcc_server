@@ -1,6 +1,7 @@
 package io.scarletgraph.api.validation;
 
 import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,5 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueUsername {
     String message() default "Username already in use!";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
 
 }
