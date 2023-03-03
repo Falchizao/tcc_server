@@ -2,12 +2,17 @@ package io.scarletgraph.api.domain;
 
 import io.scarletgraph.api.enums.Role;
 import io.scarletgraph.api.generic.IModel;
+import io.scarletgraph.api.validation.UniqueEmail;
+import io.scarletgraph.api.validation.UniqueUsername;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @jakarta.persistence.Entity(name = "tb_user")
-@Table(uniqueConstraints = @UniqueConstraint(name = "setuniquename", columnNames = "username"))
+@Table(uniqueConstraints = {
+        @UniqueConstraint(name = "setuniquename", columnNames = "username"),
+        @UniqueConstraint(name = "setuniqueemail", columnNames = "email")
+})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,11 +28,13 @@ public class User extends IModel  {
     @Column(name = "email")
     @Getter
     @Setter
+    @UniqueEmail
     String email;
 
     @Column(name = "username")
     @Getter
     @Setter
+    @UniqueUsername
     @Size(min = 6, max = 20)
     String username;
 
