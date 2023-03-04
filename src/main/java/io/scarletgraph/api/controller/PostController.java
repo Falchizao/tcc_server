@@ -5,11 +5,15 @@ import io.scarletgraph.api.dto.postDTO.PostRequest;
 import io.scarletgraph.api.dto.postDTO.PostResponse;
 import io.scarletgraph.api.generic.IController;
 import io.scarletgraph.api.service.CRUD.PostCRUDService;
+import io.scarletgraph.api.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
@@ -45,8 +49,13 @@ public class PostController extends IController<PostResponse, ResponseEntity<?>,
     }
 
     @Override
-    public ResponseEntity<PostResponse> add(PostRequest post) {
-         postCRUDService.add(post);
+    public ResponseEntity<PostResponse> add(PostRequest model) {
+        return null;
+    }
+
+    @PostMapping("/submit")
+    public ResponseEntity<PostResponse> addPost(@RequestBody String content, Authentication authentication){
+        postCRUDService.add(content, authentication.getName());
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

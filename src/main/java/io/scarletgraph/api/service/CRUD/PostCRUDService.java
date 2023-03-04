@@ -2,10 +2,10 @@ package io.scarletgraph.api.service.CRUD;
 
 import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.domain.social.Post;
-import io.scarletgraph.api.dto.postDTO.PostRequest;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.handler.modelException.ResourceNotFound;
 import io.scarletgraph.api.repository.PostRepository;
+import io.scarletgraph.api.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -19,10 +19,12 @@ public class PostCRUDService {
     private final PostRepository postRepository;
     private final UserCRUDService userCRUDService;
     private final ModelMapper mapper;
+    private final Utils utils;
 
 
-    public PostCRUDService(PostRepository postRepository, UserCRUDService userCRUDService) {
+    public PostCRUDService(PostRepository postRepository, UserCRUDService userCRUDService, Utils utils) {
         this.postRepository = postRepository;
+        this.utils = utils;
         this.userCRUDService = userCRUDService;
         this.mapper = new ModelMapper();
     }
@@ -49,9 +51,17 @@ public class PostCRUDService {
     }
 
 
-    public void add(PostRequest dto) {
+    public void add(String content, String username) {
+        log.info("fetching data....");
+        Optional<UserDTO> userdto = userCRUDService.getByUsername(username);
+
+        log.info("creating post....");
+        Post post = new Post();
+        post.setContent(content);
+        post.setUser(mapper.map(userdto.get(), User.class));
+        post.setCreatedDate(utils.getDate());
+
         log.info("Saving post....");
-        Post post = mapper.map(dto, Post.class);
         postRepository.save(post);
     }
 }
