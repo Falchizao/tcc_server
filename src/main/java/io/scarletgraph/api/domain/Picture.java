@@ -1,11 +1,11 @@
-package io.scarletgraph.api.dto.userDTO;
+package io.scarletgraph.api.domain;
 
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-public class PictureDTO {
+public class Picture {
 
     @Lob
     @Getter
