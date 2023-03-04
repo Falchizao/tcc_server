@@ -5,6 +5,8 @@ import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.enums.Role;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class Utils {
 
@@ -30,5 +32,9 @@ public class Utils {
         }
 
         return user;
+    }
+
+    public Date getDate(){
+        return new Date();
     }
 }
