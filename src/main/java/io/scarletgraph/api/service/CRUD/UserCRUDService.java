@@ -86,7 +86,6 @@ public class UserCRUDService extends IService<UserDTO> {
 
     @Override
     public UserDTO update(UserDTO dto, Long id) {
-
         User user = userRepository.findUserByUsername(dto.getUsername());
 
         if(user != null){
@@ -96,9 +95,7 @@ public class UserCRUDService extends IService<UserDTO> {
             user.setProfile(new Profile());
         }
 
-
         log.info("Updating user...");
-
         return modelMapper.map(userRepository.save(user), UserDTO.class);
     }
 

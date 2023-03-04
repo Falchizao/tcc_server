@@ -4,13 +4,13 @@ import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.dto.userDTO.UserRequest;
 import io.scarletgraph.api.dto.userDTO.UserResponse;
 import io.scarletgraph.api.generic.IController;
-import io.scarletgraph.api.repository.UserRepository;
 import io.scarletgraph.api.service.CRUD.UserCRUDService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +33,10 @@ public class UserController extends IController<UserResponse, ResponseEntity<?>,
     }
 
     @PostMapping("/type")
-    public ResponseEntity<?> setUserType(@RequestBody Long type){
-        log.info("error");
-        //userCRUDService.setUserType(type, httpServletRequest.getUserPrincipal().getName());
+    public ResponseEntity<?> setUserType(@RequestBody Integer type, Authentication authentication){
+        userCRUDService.setUserType(type, authentication.getName());
+
+        log.info("Updated user type");
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
