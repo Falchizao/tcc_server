@@ -2,9 +2,8 @@ package io.scarletgraph.api.domain;
 
 import io.scarletgraph.api.enums.Role;
 import io.scarletgraph.api.generic.IModel;
-import io.scarletgraph.api.validation.UniqueEmail;
-import io.scarletgraph.api.validation.UniqueUsername;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -26,11 +25,13 @@ public class User extends IModel  {
     private Profile profile;
 
     @Column(name = "email")
+    @NotNull
     @Getter
     @Setter
     String email;
 
     @Column(name = "username")
+    @NotNull
     @Getter
     @Setter
     @Size(min = 6, max = 20)
@@ -55,6 +56,7 @@ public class User extends IModel  {
 
     @Getter
     @Setter
+    @NotNull
     @Size(min = 8, max = 100)
     String password;
 }

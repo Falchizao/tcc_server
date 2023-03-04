@@ -4,6 +4,7 @@ import io.scarletgraph.api.domain.Profile;
 import io.scarletgraph.api.enums.Level;
 import io.scarletgraph.api.generic.IModel;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,7 @@ public class Skill extends IModel {
 
     @Getter
     @Setter
+    @NotNull
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
