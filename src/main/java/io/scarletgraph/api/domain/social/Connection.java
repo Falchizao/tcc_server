@@ -3,6 +3,7 @@ package io.scarletgraph.api.domain.social;
 import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.generic.IModel;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ public class Connection extends IModel {
     @Column(name = "connection_date")
     @Getter
     @Setter
+    @NotNull
     private Date connection_date;
 
     @OneToOne(cascade = CascadeType.ALL)
