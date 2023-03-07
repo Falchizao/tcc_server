@@ -2,9 +2,9 @@ package io.scarletgraph.api.utils;
 
 import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
-import io.scarletgraph.api.enums.Role;
 import org.springframework.stereotype.Component;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Component
@@ -36,5 +36,19 @@ public class Utils {
 
     public Date getDate(){
         return new Date();
+    }
+
+    public static String parseDateToString(LocalDate dt) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return dt.format(formatter);
+    }
+    public String generateEmailMessage (String content) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("You have been selected for the offer " + content + "\n");
+        sb.append("We are happy that you could find a new job with us!\n");
+        sb.append("With love, scarlet_graph...\n");
+
+        return sb.toString();
     }
 }
