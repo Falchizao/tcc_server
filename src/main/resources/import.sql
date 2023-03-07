@@ -11,7 +11,7 @@ INSERT INTO profile(description) VALUES ('boilerplate')
 INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('robertjones@example.com', 'Robert', 'Jones', '$2a$10$W2u3il.3MEU6KzHMuUnsW.X9k43dHKPiA6fZT6TJW8xw26B1AlY0a', 1, 'robertjones', 4);
 
 INSERT INTO profile(description) VALUES ('boilerplate')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('sarahlee@example.com', 'Sarah', 'Lee', '$2a$10$w4bUHhyjA10.6UVs9Bq3SO6jKm6TmT3q9XZ.vtH4a4zKgRlCXxoE.', 'user', 2, 5);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('sarahlee@example.com', 'Sarah', 'Lee', '$2a$10$w4bUHhyjA10.6UVs9Bq3SO6jKm6TmT3q9XZ.vtH4a4zKgRlCXxoE.', 2, 'sarahlee', 5);
 
 INSERT INTO profile(description) VALUES ('boilerplate')
 INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('michaelbrown@example.com', 'Michael', 'Brown', '$2a$10$iCwzF50mt0jKzwfsLGxS0.4ukdK2N3X9gxIKDRtET4fH/0/XRzgmy', 2, 'michaelbrown', 6);
