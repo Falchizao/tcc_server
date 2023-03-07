@@ -3,6 +3,7 @@ package io.scarletgraph.api.service.CRUD;
 
 import io.scarletgraph.api.domain.Offer;
 import io.scarletgraph.api.domain.User;
+import io.scarletgraph.api.domain.social.Post;
 import io.scarletgraph.api.dto.OfferDTO.OfferResquest;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.handler.modelException.ResourceNotFound;
@@ -35,10 +36,20 @@ public class OfferCRUDService {
         try{
             Optional<UserDTO> employer = userCRUDService.getByUsername(employerName);
 
-            return offerRepository.findOfferByUserOrderById(mapper.map(employer, User.class));
+            return offerRepository.findOfferByEmployerId(employer.get().getId());
         } catch (Exception e){
             throw new ResourceNotFound("Error fetching offers by employer!");
         }
+    }
+
+    public Optional<Offer> getById(Long id) {
+        Optional<Offer> offer = offerRepository.findById(id);
+
+        if(offer.isEmpty()) {
+            throw new ResourceNotFound("Error fetching offer!");
+        }
+
+        return offer;
     }
 
     public List<Offer> findAll() {
@@ -56,12 +67,14 @@ public class OfferCRUDService {
     }
 
 
-    public void add(OfferResquest request, String employerName) {
+    public void add(OfferResquest request, String employer_username) {
         log.info("creating offer....");
 
-        Optional<UserDTO> employer = userCRUDService.getByUsername(employerName);
+        Optional<UserDTO> employer = userCRUDService.getByUsername(employer_username);
 
-        Offer offer = mapper.map(request, Offer.class);
+        Offer offer = new Offer();
+        offer.setSalary(request.getSalary());
+        offer.setContent(request.getContent());
         offer.setEmployer(mapper.map(employer, User.class));
         offer.setCreatedDate(utils.getDate());
 

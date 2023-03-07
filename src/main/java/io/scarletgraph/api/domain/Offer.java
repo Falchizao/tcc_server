@@ -14,6 +14,8 @@ import java.util.List;
 public class Offer extends IModel {
 
     @NotNull
+    @Setter
+    @Getter
     private BigDecimal salary;
 
     @Column(name = "createdDate", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -23,15 +25,18 @@ public class Offer extends IModel {
     private Date createdDate;
 
     @NotNull
+    @Setter
+    @Getter
     private String content;
 
     @OneToOne
+    @JoinColumn(name="tb_user")
     @Setter
+    @Getter
     private User employer;
 
     @ManyToMany
+    @Getter
     @JoinColumn(name="tb_user")
     private List<User> candidates;
-
-
 }
