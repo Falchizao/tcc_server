@@ -5,7 +5,6 @@ import io.scarletgraph.api.dto.postDTO.PostRequest;
 import io.scarletgraph.api.dto.postDTO.PostResponse;
 import io.scarletgraph.api.generic.IController;
 import io.scarletgraph.api.service.CRUD.PostCRUDService;
-import io.scarletgraph.api.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

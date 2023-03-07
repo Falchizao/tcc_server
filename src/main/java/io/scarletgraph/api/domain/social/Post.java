@@ -4,8 +4,7 @@ import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.generic.IModel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
