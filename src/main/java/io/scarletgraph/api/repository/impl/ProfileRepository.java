@@ -1,4 +1,4 @@
-package io.scarletgraph.api.repository;
+package io.scarletgraph.api.repository.impl;
 
 import io.scarletgraph.api.domain.Profile;
 import io.scarletgraph.api.generic.IRepository;

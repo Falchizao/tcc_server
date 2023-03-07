@@ -1,9 +1,8 @@
 package io.scarletgraph.api.service.CRUD;
 
 import io.scarletgraph.api.domain.Profile;
-import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.handler.modelException.ResourceNotFound;
-import io.scarletgraph.api.repository.ProfileRepository;
+import io.scarletgraph.api.repository.impl.ProfileRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
