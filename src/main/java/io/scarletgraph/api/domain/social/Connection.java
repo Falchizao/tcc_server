@@ -19,13 +19,13 @@ public class Connection extends IModel {
     @NotNull
     private Date connection_date;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "first_user_id", referencedColumnName = "id")
     @Getter
     @Setter
     User firstUser;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name= "second_user_id", referencedColumnName = "id")
     @Getter
     @Setter
