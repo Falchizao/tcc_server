@@ -1,8 +1,9 @@
 package io.scarletgraph.api.dto.userDTO;
 
 import io.scarletgraph.api.enums.Role;
-import jakarta.persistence.Enumerated;
 import lombok.Getter;
+
+import javax.persistence.Enumerated;
 
 
 public class UserRequest {

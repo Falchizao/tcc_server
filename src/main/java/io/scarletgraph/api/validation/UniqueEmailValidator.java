@@ -2,10 +2,10 @@ package io.scarletgraph.api.validation;
 
 import io.scarletgraph.api.ContextProvider;
 import io.scarletgraph.api.repository.UserRepository;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
 @Service
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
@@ -14,8 +14,7 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
 
 
     @Override
-    public boolean isValid(String email,
-                           ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
         try{
             if (userRepository.findByEmail(email) == null) {
                 return true;

@@ -1,12 +1,8 @@
 package io.scarletgraph.api.controller;
 
-import javax.mail.MessagingException;
 import io.scarletgraph.api.service.EmailService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

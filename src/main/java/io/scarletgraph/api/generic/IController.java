@@ -1,8 +1,9 @@
 package io.scarletgraph.api.generic;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 

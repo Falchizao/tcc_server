@@ -8,7 +8,6 @@ import io.scarletgraph.api.dto.postDTO.PostRequest;
 import io.scarletgraph.api.dto.postDTO.PostResponse;
 import io.scarletgraph.api.dto.userDTO.UserResponse;
 import io.scarletgraph.api.service.CRUD.OfferCRUDService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

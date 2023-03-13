@@ -1,11 +1,10 @@
 package io.scarletgraph.api.generic;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
@@ -16,8 +15,7 @@ public class IModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     @Setter
-    private Long Id;
+    private Long id;
 
 }

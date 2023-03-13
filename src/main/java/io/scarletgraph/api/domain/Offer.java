@@ -1,11 +1,11 @@
 package io.scarletgraph.api.domain;
 
 import io.scarletgraph.api.generic.IModel;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;

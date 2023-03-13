@@ -1,7 +1,8 @@
 package io.scarletgraph.api.dto.connectionDTO;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+
+import javax.validation.constraints.NotBlank;
 
 public class ConnectionRequest {
     @NotBlank

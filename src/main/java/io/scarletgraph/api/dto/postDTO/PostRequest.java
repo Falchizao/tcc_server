@@ -1,7 +1,8 @@
 package io.scarletgraph.api.dto.postDTO;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+
+import javax.validation.constraints.NotNull;
 
 public class PostRequest {
 

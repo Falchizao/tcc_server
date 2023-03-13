@@ -2,13 +2,19 @@ package io.scarletgraph.api.domain;
 
 import io.scarletgraph.api.enums.Role;
 import io.scarletgraph.api.generic.IModel;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
-@jakarta.persistence.Entity(name = "tb_user")
-@Table(uniqueConstraints = {
+@Entity(name = "tb_user")
+@javax.persistence.Table(uniqueConstraints = {
         @UniqueConstraint(name = "setuniquename", columnNames = "username"),
         @UniqueConstraint(name = "setuniqueemail", columnNames = "email")
 })
@@ -16,7 +22,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User extends IModel  {
+public class User extends IModel implements UserDetails   {
 
     @Getter
     @Setter
@@ -24,14 +30,17 @@ public class User extends IModel  {
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
 
-    @Column(name = "email")
-    @NotNull
+    @Column(name = "email", length = 50)
+    @NotNull(message = "The email must not be null!")
     @Getter
     @Setter
     String email;
 
+    @Column(name = "cellphone", length = 15)
+    private String cellphone;
+
     @Column(name = "username")
-    @NotNull
+    @NotNull(message = "The Username must not be null!")
     @Getter
     @Setter
     @Size(min = 6, max = 20)
@@ -54,9 +63,40 @@ public class User extends IModel  {
     @Column(name = "type")
     private Role role;
 
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+            fetch = FetchType.EAGER)
+    private Set<Permission> permission;
+
     @Getter
     @Setter
-    @NotNull
+    @NotNull(message = "The password must not be null!")
     @Size(min = 8, max = 100)
     String password;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> list = new ArrayList<>();
+        list.addAll(this.permission);
+        return list;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

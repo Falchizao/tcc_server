@@ -1,9 +1,8 @@
 package io.scarletgraph.api.dto.OfferDTO;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Getter

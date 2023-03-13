@@ -2,11 +2,11 @@ package io.scarletgraph.api.domain.social;
 
 import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.generic.IModel;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity

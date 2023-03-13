@@ -3,10 +3,11 @@ package io.scarletgraph.api.domain.social;
 import io.scarletgraph.api.domain.Profile;
 import io.scarletgraph.api.enums.Level;
 import io.scarletgraph.api.generic.IModel;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Table(name = "skill")
 @Entity

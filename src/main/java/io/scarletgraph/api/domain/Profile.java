@@ -2,9 +2,10 @@ package io.scarletgraph.api.domain;
 
 import io.scarletgraph.api.domain.social.Skill;
 import io.scarletgraph.api.generic.IModel;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity

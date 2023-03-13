@@ -14,9 +14,9 @@ public interface UserRepository extends IRepository<User>{
 
     Optional<User> findByEmail(String email);
 
-    Optional<User> findById(Long id);
+    Optional<User> findById(Long Id);
 
-    User deleteById(Long id);
+    User deleteById(Long Id);
 
     Optional<User> findUserByEmail(String email);
 

@@ -4,9 +4,9 @@ import io.scarletgraph.api.domain.Profile;
 import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.handler.modelException.ResourceNotFound;
 import io.scarletgraph.api.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 @Slf4j

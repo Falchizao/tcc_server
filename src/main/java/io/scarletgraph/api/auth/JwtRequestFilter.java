@@ -3,10 +3,9 @@ package io.scarletgraph.api.auth;
 import java.io.IOException;
 
 import io.scarletgraph.api.repository.UserRepository;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
+import javax.servlet.FilterChain;
 import org.springframework.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

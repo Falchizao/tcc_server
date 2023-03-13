@@ -2,10 +2,9 @@ package io.scarletgraph.api.domain.social;
 
 import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.generic.IModel;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
+import org.hibernate.validator.constraints.NotBlank;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -21,12 +20,12 @@ public class Post extends IModel {
     @Column(columnDefinition = "TEXT")
     @Getter
     @Setter
-    @NotNull
+    @NotBlank
     private String content;
 
     @Column(name = "createdDate", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Getter
     @Setter
-    @NotNull
+    @NotBlank
     private Date createdDate;
 }

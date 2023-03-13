@@ -1,9 +1,10 @@
 package io.scarletgraph.api.domain;
 
-import jakarta.persistence.Lob;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.Lob;
+import javax.validation.constraints.NotNull;
 
 public class Picture {
 
