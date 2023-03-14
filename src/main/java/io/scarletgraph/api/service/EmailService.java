@@ -43,33 +43,26 @@ public class EmailService {
         try{
             HtmlEmail htmlEmail = new HtmlEmail();
 
-            htmlEmail.setHostName("ScarletGraph");
+            htmlEmail.setHostName("smtp.gmail.com");
             htmlEmail.setSmtpPort(465);
             htmlEmail.setSslSmtpPort("465");
 
-            htmlEmail.setAuthenticator(new DefaultAuthenticator("scarletgraph@gmail.com", "elfkizpvwvvuissn"));
+            htmlEmail.setAuthenticator(new DefaultAuthenticator("marcelonavarro11md@gmail.com", "htthgkbtuobyvmrw"));
             htmlEmail.setSSLOnConnect(true);
-            htmlEmail.setFrom("scarletgraph@gmail.com");
-            htmlEmail.setSubject("teste");
+            htmlEmail.setFrom("marcelonavarro11md@gmail.com");
+            htmlEmail.setSubject("Scarlet_Graph");
             htmlEmail.setStartTLSRequired(true);
-            Collection<InternetAddress> asdf = utilsService.getEmailToSend("marcelonavarro11md@gmail.com");
-            htmlEmail.setTo(asdf);
+            htmlEmail.setTo(utilsService.getEmailToSend(canditade.get().getEmail()));
 
-            htmlEmail.setHtmlMsg(utilsService.generateEmailMessage(offer.get().getContent() + "R$" + offer.get().getSalary()));
+            htmlEmail.setHtmlMsg(utilsService.generateEmailMessage(offer.get().getContent() + " R$" + offer.get().getSalary()));
 
             if (htmlEmail.getMimeMessage() == null) {
                 htmlEmail.buildMimeMessage();
             }
             htmlEmail.sendMimeMessage();
 
-//            SimpleMailMessage message = new SimpleMailMessage();
-//            message.setTo(canditade.get().getEmail());
-//            message.setFrom("scarletgraph@gmail.com");
-//            message.setText(utilsService.generateEmailMessage(offer.get().getContent() + "R$" + offer.get().getSalary()));
-//            message.setSubject("Congratulations " + cantidateName + "!");
-//            javaMailSender.send(message);
         } catch (Exception e) {
-            System.out.println("Erro nessa bomba");
+            throw new ResourceNotFound("Error fetching smtp config!");
         }
 
     }
