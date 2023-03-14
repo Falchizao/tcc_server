@@ -42,6 +42,16 @@ public class OfferController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    public ResponseEntity<List<OfferResponse>> getAllByLabel(@RequestBody String label) {
+        List<Offer> offers = offerCRUDService.findAllBylabel(label);
+
+        List<OfferResponse> response = offers.stream()
+                .map(offer -> modelMapper.map(offers, OfferResponse.class))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     public ResponseEntity<Optional<OfferResponse>> getById(Long id) {
         Optional<Offer> offer = offerCRUDService.findById(id);
         return new ResponseEntity<>(Optional.of(modelMapper.map(offer, OfferResponse.class)), HttpStatus.OK);

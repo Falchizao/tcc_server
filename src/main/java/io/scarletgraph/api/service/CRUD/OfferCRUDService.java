@@ -56,6 +56,10 @@ public class OfferCRUDService {
         return offerRepository.findAll();
     }
 
+    public List<Offer> findAllBylabel(final String label) {
+        return offerRepository.findAllByLabel(label);
+    }
+
     public Optional<Offer> findById(Long id) {
         Optional<Offer> offer = offerRepository.findById(id);
 

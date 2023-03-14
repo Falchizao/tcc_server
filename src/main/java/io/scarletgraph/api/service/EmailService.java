@@ -6,11 +6,16 @@ import io.scarletgraph.api.handler.modelException.ResourceNotFound;
 import io.scarletgraph.api.service.CRUD.OfferCRUDService;
 import io.scarletgraph.api.service.CRUD.UserCRUDService;
 import io.scarletgraph.api.utils.Utils;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Optional;
 
 @Service
@@ -36,12 +41,33 @@ public class EmailService {
         if(offer.isEmpty()){ throw new ResourceNotFound("Offer not found in system!");}
 
         try{
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(canditade.get().getEmail());
-            message.setFrom("scarletgraph@gmail.com");
-            message.setText(utilsService.generateEmailMessage(offer.get().getContent() + "R$" + offer.get().getSalary()));
-            message.setSubject("Congratulations " + cantidateName + "!");
-            javaMailSender.send(message);
+            HtmlEmail htmlEmail = new HtmlEmail();
+
+            htmlEmail.setHostName("ScarletGraph");
+            htmlEmail.setSmtpPort(465);
+            htmlEmail.setSslSmtpPort("465");
+
+            htmlEmail.setAuthenticator(new DefaultAuthenticator("scarletgraph@gmail.com", "elfkizpvwvvuissn"));
+            htmlEmail.setSSLOnConnect(true);
+            htmlEmail.setFrom("scarletgraph@gmail.com");
+            htmlEmail.setSubject("teste");
+            htmlEmail.setStartTLSRequired(true);
+            Collection<InternetAddress> asdf = utilsService.getEmailToSend("marcelonavarro11md@gmail.com");
+            htmlEmail.setTo(asdf);
+
+            htmlEmail.setHtmlMsg(utilsService.generateEmailMessage(offer.get().getContent() + "R$" + offer.get().getSalary()));
+
+            if (htmlEmail.getMimeMessage() == null) {
+                htmlEmail.buildMimeMessage();
+            }
+            htmlEmail.sendMimeMessage();
+
+//            SimpleMailMessage message = new SimpleMailMessage();
+//            message.setTo(canditade.get().getEmail());
+//            message.setFrom("scarletgraph@gmail.com");
+//            message.setText(utilsService.generateEmailMessage(offer.get().getContent() + "R$" + offer.get().getSalary()));
+//            message.setSubject("Congratulations " + cantidateName + "!");
+//            javaMailSender.send(message);
         } catch (Exception e) {
             System.out.println("Erro nessa bomba");
         }
