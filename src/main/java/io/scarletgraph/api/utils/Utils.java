@@ -54,12 +54,13 @@ public class Utils {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return dt.format(formatter);
     }
-    public String generateEmailMessage (String content) {
+    public String generateEmailMessage(String content) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("You have been selected for the offer " + content + "\n");
-        sb.append("\nWe are happy that you could find a new job with us!\n");
-        sb.append("\nWith love, scarlet_graph...\n");
+        sb.append("<h1>You have been selected for the offer: " + content + "\n");
+        sb.append("\n <br>We are happy that you could find a new job with us!</h1>\n");
+        sb.append("\n<h2><br>With love, </h2> <h1 style=\"font-size:30px; color:#FF0000; font-weight:bold; font-style:italic;\">scarlet_graph...</p> </h1>\n");
+        sb.append("<br><img src=\"https://cdn.pixabay.com/photo/2016/03/31/19/25/cartoon-1294994_960_720.png\" alt=\"Image!\" height=\"200px\" width=\"200px\" />");
 
         return sb.toString();
     }

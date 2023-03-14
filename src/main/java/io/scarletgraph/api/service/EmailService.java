@@ -50,11 +50,11 @@ public class EmailService {
             htmlEmail.setAuthenticator(new DefaultAuthenticator("marcelonavarro11md@gmail.com", "htthgkbtuobyvmrw"));
             htmlEmail.setSSLOnConnect(true);
             htmlEmail.setFrom("marcelonavarro11md@gmail.com");
-            htmlEmail.setSubject("Scarlet_Graph");
+            htmlEmail.setSubject("Congratulations, you have been selected!");
             htmlEmail.setStartTLSRequired(true);
             htmlEmail.setTo(utilsService.getEmailToSend(canditade.get().getEmail()));
 
-            htmlEmail.setHtmlMsg(utilsService.generateEmailMessage(offer.get().getContent() + " R$" + offer.get().getSalary()));
+            htmlEmail.setHtmlMsg(utilsService.generateEmailMessage("<br> Description: <strong>" + offer.get().getContent() + " </strong> <br> Salary: R$<strong>" + offer.get().getSalary() + "</strong>"));
 
             if (htmlEmail.getMimeMessage() == null) {
                 htmlEmail.buildMimeMessage();
