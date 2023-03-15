@@ -2,6 +2,7 @@ package io.scarletgraph.api.repository;
 
 import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.generic.IRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
@@ -21,4 +22,7 @@ public interface UserRepository extends IRepository<User>{
     Optional<User> findUserByEmail(String email);
 
     User findUserByUsername(String username);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM CONNECTION where FIRST_USER_ID =:user or SECOND_USER_ID =:user")
+    List<User> findAllConnections(User user);
 }

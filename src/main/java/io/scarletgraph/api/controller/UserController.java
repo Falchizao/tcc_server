@@ -42,16 +42,6 @@ public class UserController extends IController<UserResponse, ResponseEntity<?>,
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/connection")
-    public ResponseEntity<?> addConnection(@RequestBody ConnectionRequest request, Authentication authentication){
-        userCRUDService.addConnection(request.getConnection_name(), authentication.getName());
-
-        log.info("Added as connection");
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
 
     @Override
     public ResponseEntity<List<UserResponse>> getAll(HttpServletRequest httpServletRequest) {

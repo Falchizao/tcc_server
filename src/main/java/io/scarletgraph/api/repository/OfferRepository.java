@@ -16,7 +16,4 @@ public interface OfferRepository extends IRepository<Offer> {
 
     @Query(nativeQuery = true, value = "select * from offer where content like '%:label%'")
     List<Offer> findAllByLabel(String label);
-
-
-
 }

@@ -4,6 +4,7 @@ import io.scarletgraph.api.domain.Profile;
 import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.domain.social.Connection;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
+import io.scarletgraph.api.dto.userDTO.UserRequest;
 import io.scarletgraph.api.enums.Role;
 import io.scarletgraph.api.generic.IService;
 import io.scarletgraph.api.handler.modelException.ObjectInvalidException;
@@ -13,6 +14,7 @@ import io.scarletgraph.api.repository.UserRepository;
 import io.scarletgraph.api.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -133,4 +135,9 @@ public class UserCRUDService extends IService<UserDTO> {
         userRepository.save(user);
     }
 
+    public List<User> getAllConnections(String username) {
+        User user = userRepository.findUserByUsername(username);
+
+        return userRepository.findAllConnections(user);
+    }
 }
