@@ -47,9 +47,9 @@ public class EmailService {
             htmlEmail.setSmtpPort(465);
             htmlEmail.setSslSmtpPort("465");
 
-            htmlEmail.setAuthenticator(new DefaultAuthenticator("marcelonavarro11md@gmail.com", "htthgkbtuobyvmrw"));
+            htmlEmail.setAuthenticator(new DefaultAuthenticator("scarletgraph@gmail.com", "udlewdqpovumtdqf"));
             htmlEmail.setSSLOnConnect(true);
-            htmlEmail.setFrom("marcelonavarro11md@gmail.com");
+            htmlEmail.setFrom("scarletgraph@gmail.com");
             htmlEmail.setSubject("Congratulations, you have been selected!");
             htmlEmail.setStartTLSRequired(true);
             htmlEmail.setTo(utilsService.getEmailToSend(canditade.get().getEmail()));
