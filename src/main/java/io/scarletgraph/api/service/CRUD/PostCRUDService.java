@@ -8,6 +8,7 @@ import io.scarletgraph.api.repository.PostRepository;
 import io.scarletgraph.api.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,10 @@ public class PostCRUDService {
         return post;
     }
 
+    public List<Post> getByLabel(final String label) {
+        return postRepository.getByLabel(label);
+    }
+
 
     public void add(String content, String username) {
         log.info("fetching data....");
@@ -58,7 +63,9 @@ public class PostCRUDService {
         log.info("creating post....");
         Post post = new Post();
         post.setContent(content);
-        post.setUser(mapper.map(userdto.get(), User.class));
+        User user = new User();
+        BeanUtils.copyProperties(userdto.get(), user);
+        post.setUser(user);
         post.setCreatedDate(utils.getDate());
 
         log.info("Saving post....");

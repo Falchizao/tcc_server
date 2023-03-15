@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.Date;
 
+@Builder
 public class PostResponse {
 
     @Getter

@@ -38,7 +38,8 @@ public class PostController extends IController<PostResponse, ResponseEntity<?>,
         List<Post> posts = postCRUDService.getPostsByUser(httpServletRequest.getUserPrincipal().getName());
 
         return new ResponseEntity<>(posts.stream()
-                .map(personDTO -> modelMapper.map(posts, PostResponse.class))
+                .map(postDTO -> PostResponse.builder().user(postDTO.getUser()).content(postDTO.getContent())
+                        .createdDate(postDTO.getCreatedDate()).build())
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
@@ -68,6 +69,16 @@ public class PostController extends IController<PostResponse, ResponseEntity<?>,
     @Override
     public ResponseEntity<PostResponse> update(PostRequest model, Long id) {
         return null;
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<List<PostResponse>> getByLabel(@RequestBody String label) {
+        List<Post> list = postCRUDService.getByLabel(label);
+
+        return new ResponseEntity<>(list.stream()
+                .map(postDTO -> PostResponse.builder().user(postDTO.getUser()).content(postDTO.getContent())
+                        .createdDate(postDTO.getCreatedDate()).build())
+                .collect(Collectors.toList()), HttpStatus.OK);
     }
 }
 
