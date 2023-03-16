@@ -1,21 +1,51 @@
 version: '3.3'
 
 networks:
-  api-network:
+  db:
     driver: bridge
 
 volumes:
   prometheus_data:
   grafana_data:
+  postgres_data:
 
 services:
+  api:
+    container_name: api
+    image: maven:3.8.3-openjdk-17
+    working_dir: /home/java/app
+    restart: always
+    command: ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    volumes:
+      - .././:/home/java/app
+    ports:
+      - "8085:8085"
+      - "5005:5005"
+    networks:
+      - db
+    depends_on:
+      - db
+  db:
+    container_name: db
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - postgres_data:/data/postgres
+    ports:
+      - "6060:6060"
+    networks:
+      - db
+    restart: unless-stopped
   prometheus:
     image: prom/prometheus:latest
     volumes:
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
     networks:
-      - api-network
+      - db
     ports:
       - 9090:9090
   grafana:
@@ -23,4 +53,4 @@ services:
     ports:
       - 3000:3000
     networks:
-      - api-network
+      - db
