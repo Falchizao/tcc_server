@@ -11,6 +11,6 @@ import javax.persistence.Entity;
 @Getter
 public class Authority extends IModel implements GrantedAuthority {
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 40, nullable = false)
     private String authority;
 }

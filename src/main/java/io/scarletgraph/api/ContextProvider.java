@@ -18,5 +18,4 @@ public class ContextProvider implements ApplicationContextAware {
     public static Object getBean(Class cls) {
         return ContextProvider.applicationContext.getBean(cls);
     }
-
 }
