@@ -3,7 +3,9 @@ package io.scarletgraph.api.domain;
 import io.scarletgraph.api.enums.Role;
 import io.scarletgraph.api.generic.IModel;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity(name = "tb_user")
-@javax.persistence.Table(uniqueConstraints = {
+@Table(uniqueConstraints = {
         @UniqueConstraint(name = "setuniquename", columnNames = "username"),
         @UniqueConstraint(name = "setuniqueemail", columnNames = "email")
 })
@@ -34,9 +36,11 @@ public class User extends IModel implements UserDetails   {
     @NotNull(message = "The email must not be null!")
     @Getter
     @Setter
+    @Email(message = "Invalid email format, please verify!", regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
     String email;
 
-    @Column(name = "cellphone", length = 15)
+    @Column(name = "cellphone", length = 20)
+    @Size(max = 20, message = "Invalid cellphone number, please verify!")
     private String cellphone;
 
     @Column(name = "username")
@@ -63,40 +67,46 @@ public class User extends IModel implements UserDetails   {
     @Column(name = "type")
     private Role role;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST},
-            fetch = FetchType.EAGER)
-    private Set<Permission> permission;
 
     @Getter
     @Setter
     @NotNull(message = "The password must not be null!")
     @Size(min = 8, max = 100)
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
     String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> list = new ArrayList<>();
-        list.addAll(this.permission);
+        list.addAll(this.permissions);
         return list;
     }
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authorities",
+            joinColumns = @JoinColumn(
+                    name = "tb_user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "authority_id", referencedColumnName = "id"))
+    private Set<Authority> permissions;
+
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
