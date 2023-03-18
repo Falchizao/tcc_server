@@ -3,7 +3,6 @@ package io.scarletgraph.api.domain;
 import io.scarletgraph.api.generic.IModel;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
