@@ -26,13 +26,13 @@ INSERT INTO TB_USER (email, first_name, last_name, password, type, username, pro
 INSERT INTO profile(description) VALUES ('boilerplate')
 INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('davidsmith@example.com', 'Samara', 'Smith', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 2, 'samarasmith', 8);
 
-INSERT into offer (content, created_date, hours, salary, tb_user) VALUES ('Pessoa Programadora Delphi Pleno', now(), 8.48, 1800, 1);
-INSERT into offer (content, created_date, hours, salary, tb_user) VALUES ('Pessoa Programadora Java Senior', now(), 8, 5000, 2);
-INSERT into offer (content, created_date, hours, salary, tb_user) VALUES ('Pessoa Programadora Node JS Pleno', now(), 8, 4200, 3);
-INSERT into offer (content, created_date, hours, salary, tb_user) VALUES ('Arquiteto Java', now(), 8, 13500, 4);
-INSERT into offer (content, created_date, hours, salary, tb_user) VALUES ('Estágio PHP', now(), 6, 1500, 5);
-INSERT into offer (content, created_date, hours, salary, tb_user) VALUES ('Programadora Ruby on Rails', now(), 8, 3200, 6);
-INSERT into offer (content, created_date, hours, salary, tb_user) VALUES ('Pessoa Programadora Flutter', now(), 8, 4300, 7);
+INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Pessoa Programadora Delphi Pleno', 'Atenciosa, prestativa e gostar de trabalhar', now(), 8.48, 1800, 1);
+INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Pessoa Programadora Java Senior', 'Buscamos pessoas com facilidade de aprendizado', now(), 8, 5000, 2);
+INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Pessoa Programadora Node JS Pleno', 'Deve-se conhecer bem node js', now(), 8, 4200, 3);
+INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Arquiteto Java', 'Microsservices e Kafka', now(), 8, 13500, 4);
+INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Estagio PHP', 'Composer e Fullstack', now(), 6, 1500, 5);
+INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Programadora Ruby on Rails', '+ de 3 anos de experiencia', now(), 8, 3200, 6);
+INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Pessoa Programadora Flutter', 'Getx e RiverPod', now(), 8, 4300, 7);
 
 INSERT INTO post (content, created_date, tb_user_id) values ('Adoro essa plataforma!', now(), 1);
 INSERT INTO post (content, created_date, tb_user_id) values ('Aff, php é muito ruim', now(), 2);
