@@ -1,23 +1,21 @@
 package io.scarletgraph.api.dto.OfferDTO;
 
-import io.scarletgraph.api.domain.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Getter
 @Setter
+@Builder
 public class OfferResponse {
 
-    @Getter
-    @Setter
     private BigDecimal salary;
-
-    @Getter
-    @Setter
     private String content;
+    private String employer;
+    private Double hours;
+    private Date createdDate;
 
-    @Getter
-    @Setter
-    private User employer;
+
 }

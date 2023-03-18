@@ -34,12 +34,15 @@ public class OfferController {
     @GetMapping
     public ResponseEntity<List<OfferResponse>> getAll() {
         List<Offer> offers = offerCRUDService.findAll();
+        List<OfferResponse> responses = offers.stream().map(offerDto -> OfferResponse.builder()
+                .content(offerDto.getContent())
+                .employer(offerDto.getEmployer().getUsername())
+                .hours(offerDto.getHours())
+                .salary(offerDto.getSalary())
+                .createdDate(offerDto.getCreatedDate())
+                .build()).collect(Collectors.toList());
 
-        List<OfferResponse> response = offers.stream()
-                .map(offer -> modelMapper.map(offers, OfferResponse.class))
-                .collect(Collectors.toList());
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
     public ResponseEntity<List<OfferResponse>> getAllByLabel(@RequestBody String label) {
