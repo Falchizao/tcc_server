@@ -78,7 +78,7 @@ public class User extends IModel implements UserDetails   {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> list = new ArrayList<>();
-        list.addAll(this.permissions);
+        list.addAll(this.authorities);
         return list;
     }
 
@@ -88,7 +88,7 @@ public class User extends IModel implements UserDetails   {
                     name = "tb_user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "authority_id", referencedColumnName = "id"))
-    private Set<Authority> permissions;
+    private Set<Authority> authorities;
 
     @Override
     public boolean isAccountNonExpired() {

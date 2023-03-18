@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
@@ -35,12 +34,15 @@ public class PostController extends IController<PostResponse, ResponseEntity<?>,
 
     @Override
     public ResponseEntity<List<PostResponse>> getAll(HttpServletRequest httpServletRequest) {
-        List<Post> posts = postCRUDService.getPostsByUser(httpServletRequest.getUserPrincipal().getName());
+        List<Post> posts = postCRUDService.getAll();
 
-        return new ResponseEntity<>(posts.stream()
-                .map(postDTO -> PostResponse.builder().user(postDTO.getUser()).content(postDTO.getContent())
-                        .createdDate(postDTO.getCreatedDate()).build())
-                .collect(Collectors.toList()), HttpStatus.OK);
+        List<PostResponse> response = posts.stream().map(postDTO -> PostResponse.builder()
+                .createdDate(postDTO.getCreatedDate())
+                .username(postDTO.getUser().getUsername())
+                .content(postDTO.getContent())
+                .build()).collect(Collectors.toList());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
@@ -75,10 +77,13 @@ public class PostController extends IController<PostResponse, ResponseEntity<?>,
     public ResponseEntity<List<PostResponse>> getByLabel(@RequestBody String label) {
         List<Post> list = postCRUDService.getByLabel(label);
 
-        return new ResponseEntity<>(list.stream()
-                .map(postDTO -> PostResponse.builder().user(postDTO.getUser()).content(postDTO.getContent())
-                        .createdDate(postDTO.getCreatedDate()).build())
-                .collect(Collectors.toList()), HttpStatus.OK);
+        List<PostResponse> response = list.stream().map(postDTO -> PostResponse.builder()
+                .createdDate(postDTO.getCreatedDate())
+                .username(postDTO.getUser().getUsername())
+                .content(postDTO.getContent())
+                .build()).collect(Collectors.toList());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
 

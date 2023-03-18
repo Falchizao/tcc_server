@@ -30,6 +30,9 @@ public class PostCRUDService {
         this.mapper = new ModelMapper();
     }
 
+    public List<Post> getAll() {
+        return postRepository.findAll();
+    }
 
     public List<Post> getPostsByUser(String username) {
         try{

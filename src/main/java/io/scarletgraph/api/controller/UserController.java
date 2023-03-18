@@ -1,6 +1,5 @@
 package io.scarletgraph.api.controller;
 
-import io.scarletgraph.api.dto.connectionDTO.ConnectionRequest;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.dto.userDTO.UserRequest;
 import io.scarletgraph.api.dto.userDTO.UserResponse;
