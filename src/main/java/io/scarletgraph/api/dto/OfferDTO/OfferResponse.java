@@ -16,6 +16,5 @@ public class OfferResponse {
     private String employer;
     private Double hours;
     private Date createdDate;
-
-
+    private String title;
 }

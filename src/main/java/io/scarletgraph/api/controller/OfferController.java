@@ -40,6 +40,7 @@ public class OfferController {
                 .hours(offerDto.getHours())
                 .salary(offerDto.getSalary())
                 .createdDate(offerDto.getCreatedDate())
+                .title(offerDto.getTitle())
                 .build()).collect(Collectors.toList());
 
         return new ResponseEntity<>(responses, HttpStatus.OK);
