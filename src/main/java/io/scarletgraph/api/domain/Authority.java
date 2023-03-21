@@ -1,15 +1,19 @@
 package io.scarletgraph.api.domain;
 
 import io.scarletgraph.api.generic.IModel;
-import lombok.Getter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
-@Getter
+@Table(name = "tb_authority")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@EqualsAndHashCode(of = {"id"})
 public class Authority extends IModel implements GrantedAuthority {
 
-    @Column(length = 40, nullable = false)
+    @Column(length = 50, nullable = false)
     private String authority;
 }
