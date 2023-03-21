@@ -14,5 +14,11 @@ public class OfferResquest {
 
     @NotNull(message = "Content must not be null!")
     private String content;
+
+    @NotNull(message = "Title must not be null!")
+    private String title;
+
+    @NotNull(message = "Hours must not be null!")
+    private Double hours;
 }
 

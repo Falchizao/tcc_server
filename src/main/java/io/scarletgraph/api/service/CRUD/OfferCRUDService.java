@@ -77,7 +77,9 @@ public class OfferCRUDService {
         Optional<UserDTO> employer = userCRUDService.getByUsername(employer_username);
 
         Offer offer = new Offer();
+        offer.setHours(request.getHours());
         offer.setSalary(request.getSalary());
+        offer.setTitle(request.getTitle());
         offer.setContent(request.getContent());
         offer.setEmployer(mapper.map(employer, User.class));
         offer.setCreatedDate(utils.getDate());
