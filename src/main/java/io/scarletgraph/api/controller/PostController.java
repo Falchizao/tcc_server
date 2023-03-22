@@ -57,7 +57,7 @@ public class PostController extends IController<PostResponse, ResponseEntity<?>,
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<PostResponse> addPost(@RequestBody String content, Authentication authentication){
+    public ResponseEntity<PostResponse> addPost(@RequestBody PostRequest content, Authentication authentication){
         postCRUDService.add(content, authentication.getName());
 
         return new ResponseEntity<>(HttpStatus.CREATED);

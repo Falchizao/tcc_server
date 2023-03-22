@@ -2,6 +2,7 @@ package io.scarletgraph.api.service.CRUD;
 
 import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.domain.social.Post;
+import io.scarletgraph.api.dto.postDTO.PostRequest;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.handler.modelException.ResourceNotFound;
 import io.scarletgraph.api.repository.PostRepository;
@@ -59,13 +60,13 @@ public class PostCRUDService {
     }
 
 
-    public void add(String content, String username) {
+    public void add(PostRequest content, String username) {
         log.info("fetching data....");
         Optional<UserDTO> userdto = userCRUDService.getByUsername(username);
 
         log.info("creating post....");
         Post post = new Post();
-        post.setContent(content);
+        post.setContent(content.getContent());
         User user = new User();
         BeanUtils.copyProperties(userdto.get(), user);
         post.setUser(user);
