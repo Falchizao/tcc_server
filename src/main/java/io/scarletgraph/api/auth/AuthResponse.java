@@ -1,16 +1,18 @@
 package io.scarletgraph.api.auth;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import io.scarletgraph.api.enums.Role;
+import lombok.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AuthResponse {
+@Getter
+@Setter
+public class AuthResponse implements Serializable {
 
     private String token;
+    private Role user_role;
 
 }

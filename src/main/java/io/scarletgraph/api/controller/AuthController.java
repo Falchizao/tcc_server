@@ -1,9 +1,11 @@
 package io.scarletgraph.api.controller;
 
+import io.scarletgraph.api.auth.AuthResponse;
 import io.scarletgraph.api.auth.AuthService;
 import io.scarletgraph.api.auth.JwtTokenService;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.dto.userDTO.UserRequest;
+import io.scarletgraph.api.dto.userDTO.UserResponse;
 import io.scarletgraph.api.handler.modelException.UserNotFoundInSystem;
 import io.scarletgraph.api.service.CRUD.UserCRUDService;
 import org.modelmapper.ModelMapper;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/authorization")
@@ -48,7 +51,11 @@ public class AuthController {
         }catch(Exception e){
             throw new UserNotFoundInSystem("Crendenciais não encontradas no sistema!");
         }
-        return ResponseEntity.ok(jwtTokenService.generateJwtToken(authentication));
+        Optional<UserDTO> dto = userCRUDService.getByUsername(userLogin.getUsername());
+        AuthResponse auth = new AuthResponse();
+        auth.setToken(jwtTokenService.generateJwtToken(authentication));
+        auth.setUser_role(dto.get().getRole());
+        return ResponseEntity.ok(auth);
     }
 
     @PostMapping("/register")

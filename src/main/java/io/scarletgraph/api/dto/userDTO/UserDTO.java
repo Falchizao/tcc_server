@@ -1,13 +1,14 @@
 package io.scarletgraph.api.dto.userDTO;
 
 import io.scarletgraph.api.enums.Role;
-import lombok.Getter;
-import lombok.Setter;
-import javax.persistence.Enumerated;
+import lombok.*;
+
 import javax.validation.constraints.Pattern;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDTO {
-
     @Getter
     @Setter
     private Long id;
@@ -32,8 +33,9 @@ public class UserDTO {
     @Setter
     String lastName;
 
-    @Enumerated
-    private Role role;
+    @Setter
+    @Getter
+    Role role;
 
     @Getter
     @Setter

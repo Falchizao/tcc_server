@@ -64,6 +64,7 @@ public class User extends IModel implements UserDetails   {
 
     @Enumerated
     @Setter
+    @Getter
     @Column(name = "type")
     private Role role;
 
@@ -83,6 +84,7 @@ public class User extends IModel implements UserDetails   {
     }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Getter
     @JoinTable(name = "user_authorities",
             joinColumns = @JoinColumn(
                     name = "tb_user_id", referencedColumnName = "id"),

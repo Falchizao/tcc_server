@@ -1,16 +1,17 @@
 package io.scarletgraph.api.dto.userDTO;
 
-import io.scarletgraph.api.domain.Authority;
+import io.scarletgraph.api.enums.Role;
 import lombok.Builder;
 import lombok.Setter;
-import java.util.Set;
+
+import java.io.Serializable;
 
 @Builder
-public class UserResponse {
+public class UserResponse implements Serializable {
 
     @Setter
     private String username;
 
     @Setter
-    private Set<Authority> authorities;
+    private Role role;
 }

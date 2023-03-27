@@ -124,7 +124,12 @@ public class UserCRUDService extends IService<UserDTO> {
         log.info("Trying to find desired user...");
         User user = userRepository.findUserByUsername(username);
 
-        return Optional.of(modelMapper.map(user, UserDTO.class));
+        return Optional.of(UserDTO.builder()
+                .email(user.getEmail())
+                .firstName(user.getFirstName())
+                .username(user.getUsername())
+                .role(user.getRole())
+                .build());
     }
 
     public void setUserType(Integer type, String username) {
