@@ -14,6 +14,8 @@ import io.scarletgraph.api.repository.UserRepository;
 import io.scarletgraph.api.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -130,6 +132,10 @@ public class UserCRUDService extends IService<UserDTO> {
                 .username(user.getUsername())
                 .role(user.getRole())
                 .build());
+    }
+
+    public Page<User> getByPage(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
     public void setUserType(Integer type, String username) {

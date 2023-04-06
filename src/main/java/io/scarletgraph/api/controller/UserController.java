@@ -1,5 +1,6 @@
 package io.scarletgraph.api.controller;
 
+import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.dto.userDTO.UserRequest;
 import io.scarletgraph.api.dto.userDTO.UserResponse;
@@ -7,13 +8,13 @@ import io.scarletgraph.api.generic.IController;
 import io.scarletgraph.api.service.CRUD.UserCRUDService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,12 @@ public class UserController extends IController<UserResponse, ResponseEntity<?>,
         log.info("Updated user type");
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @GetMapping("/page")
+    public Page<User> get(Pageable pageable) {
+        return userCRUDService.getByPage(pageable);
     }
 
 
