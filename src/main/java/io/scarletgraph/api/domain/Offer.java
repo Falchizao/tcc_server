@@ -47,6 +47,7 @@ public class Offer extends IModel {
 
     @ManyToMany
     @Getter
+    @Setter
     @JoinColumn(name="tb_user")
     private List<User> candidates;
 }

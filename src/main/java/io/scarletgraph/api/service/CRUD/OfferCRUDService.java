@@ -1,13 +1,12 @@
 package io.scarletgraph.api.service.CRUD;
 
-
 import io.scarletgraph.api.domain.Offer;
 import io.scarletgraph.api.domain.User;
-import io.scarletgraph.api.domain.social.Post;
 import io.scarletgraph.api.dto.OfferDTO.OfferResquest;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.handler.modelException.ResourceNotFound;
 import io.scarletgraph.api.repository.OfferRepository;
+import io.scarletgraph.api.repository.UserRepository;
 import io.scarletgraph.api.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -21,13 +20,15 @@ public class OfferCRUDService {
 
     private final OfferRepository offerRepository;
     private final UserCRUDService userCRUDService;
+    private final UserRepository userRepository;
     private final ModelMapper mapper;
     private final Utils utils;
 
 
-    public OfferCRUDService(OfferRepository offerRepository, UserCRUDService userCRUDService, Utils utils) {
+    public OfferCRUDService(UserRepository userRepository, OfferRepository offerRepository, UserCRUDService userCRUDService, Utils utils) {
         this.offerRepository = offerRepository;
         this.utils = utils;
+        this.userRepository = userRepository;
         this.userCRUDService = userCRUDService;
         this.mapper = new ModelMapper();
     }
@@ -56,6 +57,25 @@ public class OfferCRUDService {
         return offerRepository.findAll();
     }
 
+    public void applyToOffer(Long offerID, String employer_name) {
+        User user = userRepository.findUserByUsername(employer_name);
+        Optional<Offer> offer = offerRepository.findById(offerID);
+
+        if(offer.isEmpty()) {
+            throw new ResourceNotFound("Offer not found in system!");
+        }
+
+        try{
+            List<User> users = offer.get().getCandidates();
+            users.add(user);
+            offer.get().setCandidates(users);
+            offerRepository.save(offer.get());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
     public List<Offer> findAllBylabel(final String label) {
         return offerRepository.findAllByLabel(label);
     }
@@ -74,17 +94,17 @@ public class OfferCRUDService {
     public void add(OfferResquest request, String employer_username) {
         log.info("creating offer....");
 
-        Optional<UserDTO> employer = userCRUDService.getByUsername(employer_username);
+        User employer = userRepository.findUserByUsername(employer_username);
 
         Offer offer = new Offer();
         offer.setHours(request.getHours());
         offer.setSalary(request.getSalary());
         offer.setTitle(request.getTitle());
         offer.setContent(request.getContent());
-        offer.setEmployer(mapper.map(employer, User.class));
+        offer.setEmployer(employer);
         offer.setCreatedDate(utils.getDate());
-
         log.info("Saving offer....");
         offerRepository.save(offer);
+        log.info("Offer save with success....");
     }
 }

@@ -1,12 +1,10 @@
 package io.scarletgraph.api.controller;
 
 import io.scarletgraph.api.domain.Offer;
-import io.scarletgraph.api.domain.social.Post;
 import io.scarletgraph.api.dto.OfferDTO.OfferResponse;
 import io.scarletgraph.api.dto.OfferDTO.OfferResquest;
 import io.scarletgraph.api.dto.postDTO.PostRequest;
 import io.scarletgraph.api.dto.postDTO.PostResponse;
-import io.scarletgraph.api.dto.userDTO.UserResponse;
 import io.scarletgraph.api.service.CRUD.OfferCRUDService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -35,6 +33,7 @@ public class OfferController {
     public ResponseEntity<List<OfferResponse>> getAll() {
         List<Offer> offers = offerCRUDService.findAll();
         List<OfferResponse> responses = offers.stream().map(offerDto -> OfferResponse.builder()
+                .id(offerDto.getId())
                 .content(offerDto.getContent())
                 .employer(offerDto.getEmployer().getUsername())
                 .hours(offerDto.getHours())
@@ -56,9 +55,10 @@ public class OfferController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    public ResponseEntity<Optional<OfferResponse>> getById(Long id) {
+    @PostMapping("offerdetails")
+    public ResponseEntity<Offer> getById(@RequestParam(name = "id") Long id) {
         Optional<Offer> offer = offerCRUDService.findById(id);
-        return new ResponseEntity<>(Optional.of(modelMapper.map(offer, OfferResponse.class)), HttpStatus.OK);
+        return new ResponseEntity<>(offer.get(), HttpStatus.OK);
     }
 
     @PostMapping("add")
@@ -68,8 +68,9 @@ public class OfferController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<PostResponse> addOffer(@RequestBody OfferResquest offer, Authentication authentication){
-        offerCRUDService.add(offer, authentication.getName());
+    @PostMapping("/apply")
+    public ResponseEntity<PostResponse> addOffer(@RequestParam(name = "id") Long id, Authentication authentication){
+        offerCRUDService.applyToOffer(id, authentication.getName());
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

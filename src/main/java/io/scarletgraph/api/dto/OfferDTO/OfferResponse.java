@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 @Builder
 public class OfferResponse {
-
+    private Long id;
     private BigDecimal salary;
     private String content;
     private String employer;
