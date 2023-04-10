@@ -20,15 +20,15 @@ public class Connection extends IModel {
     private Date connection_date;
 
     @OneToOne
-    @JoinColumn(name = "first_user_id", referencedColumnName = "id")
+    @JoinColumn(name = "follower", referencedColumnName = "id")
     @Getter
     @Setter
-    User firstUser;
+    User follower;
 
     @OneToOne
-    @JoinColumn(name= "second_user_id", referencedColumnName = "id")
+    @JoinColumn(name= "following", referencedColumnName = "id")
     @Getter
     @Setter
-    User secondUser;
+    User following;
 
 }

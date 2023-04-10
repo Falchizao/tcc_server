@@ -1,7 +1,6 @@
 package io.scarletgraph.api.controller;
 
 import io.scarletgraph.api.domain.User;
-import io.scarletgraph.api.dto.connectionDTO.ConnectionRequest;
 import io.scarletgraph.api.dto.userDTO.UserResponse;
 import io.scarletgraph.api.service.CRUD.UserCRUDService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,19 +22,17 @@ public class ConnectionController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<UserResponse>> getAllConnections(Authentication authentication) {
+    public ResponseEntity<List<User>> getAllConnections(Authentication authentication) {
         List<User> connectionsList = userCRUDService.getAllConnections(authentication.getName());
-
-        return new ResponseEntity<>(connectionsList.stream()
-                .map(connection -> UserResponse.builder().username(connection.getUsername()).build())
-                .collect(Collectors.toList()), HttpStatus.OK);
+        return new ResponseEntity<>(connectionsList, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addConnection(@RequestBody ConnectionRequest request, Authentication authentication){
-        userCRUDService.addConnection(request.getConnection_name(), authentication.getName());
 
-        log.info("Added as connection");
+    @PostMapping("/follow")
+    public ResponseEntity<?> addConnection(@RequestParam(name = "name") String username, Authentication authentication){
+        userCRUDService.addConnection(username, authentication.getName());
+
+        log.info("now following");
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
