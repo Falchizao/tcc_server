@@ -1,7 +1,10 @@
 package io.scarletgraph.api.repository;
 
 import io.scarletgraph.api.domain.User;
+import io.scarletgraph.api.domain.social.Connection;
 import io.scarletgraph.api.generic.IRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -23,6 +26,8 @@ public interface UserRepository extends IRepository<User>{
 
     User findUserByUsername(String username);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM CONNECTION where FIRST_USER_ID =:user or SECOND_USER_ID =:user")
+    List<User> findByUsernameContaining(String username);
+
+    @Query(nativeQuery = true, value = "select * from tb_user inner join connection c on c.following = tb_user.id where c.follower =:user")
     List<User> findAllConnections(User user);
 }

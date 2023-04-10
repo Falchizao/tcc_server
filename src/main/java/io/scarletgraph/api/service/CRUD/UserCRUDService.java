@@ -5,6 +5,7 @@ import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.domain.social.Connection;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.dto.userDTO.UserRequest;
+import io.scarletgraph.api.dto.userDTO.UserResponse;
 import io.scarletgraph.api.enums.Role;
 import io.scarletgraph.api.generic.IService;
 import io.scarletgraph.api.handler.modelException.ObjectInvalidException;
@@ -12,6 +13,8 @@ import io.scarletgraph.api.handler.modelException.ResourceNotFound;
 import io.scarletgraph.api.repository.ConnectionRepository;
 import io.scarletgraph.api.repository.UserRepository;
 import io.scarletgraph.api.utils.Utils;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -19,6 +22,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.Enumerated;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,6 +56,10 @@ public class UserCRUDService extends IService<UserDTO> {
                 .collect(Collectors.toList());
     }
 
+    public User getUserDetails(String username) {
+        return userRepository.findUserByUsername(username);
+    }
+
     @Override
     public Optional<UserDTO> getById(Long id) {
         log.info("Trying to find desired user...");
@@ -61,17 +70,36 @@ public class UserCRUDService extends IService<UserDTO> {
 
     public void addConnection(String connection_name, String username) {
 
-        Optional<UserDTO> connectionUser = this.getByUsername(connection_name);
-        Optional<UserDTO> author = this.getByUsername(username);
+        try{
+            Connection connection = new Connection();
+            connection.setFollowing(userRepository.findUserByUsername(connection_name));
+            connection.setFollower(userRepository.findUserByUsername(username));
+            connection.setConnection_date(utils.getDate());
 
-        if(connectionUser.isEmpty()){ throw new ResourceNotFound("Connection user not found in system!"); }
+            connectionRepository.save(connection);
+        } catch (Exception e) {
+            throw new ResourceNotFound("Error fetching users details to make a new connection!");
 
-        Connection connection = new Connection();
-        connection.setFirstUser(modelMapper.map(author.get(), User.class));
-        connection.setSecondUser(modelMapper.map(connectionUser.get(), User.class));
-        connection.setConnection_date(utils.getDate());
+        }
+    }
 
-        connectionRepository.save(connection);
+
+    public UserResponse updateProfile(UserRequest model, String username) {
+        User user = userRepository.findUserByUsername(username);
+
+        user.getProfile().setDescription(model.getDescription());
+        user.getProfile().setLocation(model.getLocation());
+        user.setFirstName(model.getFirstName());
+        user.setLastName(model.getLastName());
+        User updateduser = userRepository.save(user);
+
+        return UserResponse.builder().firstName(updateduser.getFirstName())
+                .lastName(updateduser.getLastName())
+                .username(updateduser.getUsername())
+                .email(user.getEmail())
+                .role(updateduser.getRole())
+                .description(updateduser.getProfile().getDescription())
+                .location(updateduser.getProfile().getLocation()).build();
     }
 
     @Override
@@ -134,8 +162,25 @@ public class UserCRUDService extends IService<UserDTO> {
                 .build());
     }
 
+    public UserResponse getAllUserInfo(String username) {
+        User user = userRepository.findUserByUsername(username);
+        UserResponse response = UserResponse.builder().firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .description(user.getProfile().getDescription())
+                .location(user.getProfile().getLocation()).build();
+        return response;
+    }
+
     public Page<User> getByPage(Pageable pageable) {
         return userRepository.findAll(pageable);
+    }
+
+    public List<User> getAllBySubStr(String username_substr) {
+        List<User> userList = userRepository.findByUsernameContaining(username_substr);
+        return userList;
     }
 
     public void setUserType(Integer type, String username) {
@@ -148,7 +193,6 @@ public class UserCRUDService extends IService<UserDTO> {
 
     public List<User> getAllConnections(String username) {
         User user = userRepository.findUserByUsername(username);
-
         return userRepository.findAllConnections(user);
     }
 }

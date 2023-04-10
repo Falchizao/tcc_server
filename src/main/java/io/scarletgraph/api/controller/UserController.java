@@ -2,9 +2,11 @@ package io.scarletgraph.api.controller;
 
 import io.scarletgraph.api.domain.User;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
+import io.scarletgraph.api.dto.userDTO.UserFetchRequest;
 import io.scarletgraph.api.dto.userDTO.UserRequest;
 import io.scarletgraph.api.dto.userDTO.UserResponse;
 import io.scarletgraph.api.generic.IController;
+import io.scarletgraph.api.handler.modelException.ResourceNotFound;
 import io.scarletgraph.api.service.CRUD.UserCRUDService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -14,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
@@ -42,12 +43,29 @@ public class UserController extends IController<UserResponse, ResponseEntity<?>,
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
     @GetMapping("/page")
     public Page<User> get(Pageable pageable) {
         return userCRUDService.getByPage(pageable);
     }
 
+    @PostMapping("/owninfo")
+    public ResponseEntity<UserResponse> getINfo(HttpServletRequest httpServletRequest) {
+        UserResponse user = userCRUDService.getAllUserInfo(httpServletRequest.getUserPrincipal().getName());
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @PostMapping("/fetchallByUsername")
+    public ResponseEntity<List<User>> getByFilter(@RequestBody UserFetchRequest fetchRequest) {
+        List<User> users = userCRUDService.getAllBySubStr(fetchRequest.getUserStr());
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/findByUsername")
+    public ResponseEntity<User> getByUsername(@RequestParam(name = "name") String username) {
+        User user = userCRUDService.getUserDetails(username);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 
     @Override
     public ResponseEntity<List<UserResponse>> getAll(HttpServletRequest httpServletRequest) {
@@ -84,5 +102,11 @@ public class UserController extends IController<UserResponse, ResponseEntity<?>,
         UserDTO dto = userCRUDService.update(modelMapper.map(model, UserDTO.class), id);
 
         return new ResponseEntity<>(modelMapper.map(dto, UserResponse.class), HttpStatus.OK);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<UserResponse> updateProfile(@RequestBody UserRequest model, Authentication authentication) {
+        UserResponse updated_user = userCRUDService.updateProfile(model, authentication.getName());
+        return new ResponseEntity<>(updated_user, HttpStatus.OK);
     }
 }

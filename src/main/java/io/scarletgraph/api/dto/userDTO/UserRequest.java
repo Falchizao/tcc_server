@@ -8,7 +8,10 @@ import javax.persistence.Enumerated;
 
 public class UserRequest {
 
+    @Getter
     private String firstName;
+
+    @Getter
     private String lastName;
 
     @Getter
@@ -23,4 +26,10 @@ public class UserRequest {
     @Enumerated
     @Getter
     private Role role;
+
+    @Getter
+    private String description;
+
+    @Getter
+    private String location;
 }

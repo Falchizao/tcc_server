@@ -14,7 +14,6 @@ public class ProfileCRUDService {
 
     private final ProfileRepository profileRespository;
 
-
     public ProfileCRUDService(ProfileRepository profileRespository) {
         this.profileRespository = profileRespository;
     }

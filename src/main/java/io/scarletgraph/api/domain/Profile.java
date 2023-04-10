@@ -23,9 +23,6 @@ public class Profile extends IModel {
     @Column(name="profile_picture")
     private byte[] profile_picture;
 
-    @Setter
-    @OneToOne(mappedBy = "profile")
-    private User user;
 
     @Getter
     @Setter
@@ -38,4 +35,8 @@ public class Profile extends IModel {
     @Getter
     @Setter
     private String description;
+
+    @Getter
+    @Setter
+    private String location;
 }
