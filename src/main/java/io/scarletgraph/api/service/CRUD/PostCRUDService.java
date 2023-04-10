@@ -6,6 +6,7 @@ import io.scarletgraph.api.dto.postDTO.PostRequest;
 import io.scarletgraph.api.dto.userDTO.UserDTO;
 import io.scarletgraph.api.handler.modelException.ResourceNotFound;
 import io.scarletgraph.api.repository.PostRepository;
+import io.scarletgraph.api.repository.UserRepository;
 import io.scarletgraph.api.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -20,15 +21,17 @@ public class PostCRUDService {
 
     private final PostRepository postRepository;
     private final UserCRUDService userCRUDService;
+    private final UserRepository userRepository;
     private final ModelMapper mapper;
     private final Utils utils;
 
 
-    public PostCRUDService(PostRepository postRepository, UserCRUDService userCRUDService, Utils utils) {
+    public PostCRUDService(PostRepository postRepository, UserCRUDService userCRUDService, Utils utils, UserRepository userRepository) {
         this.postRepository = postRepository;
         this.utils = utils;
         this.userCRUDService = userCRUDService;
         this.mapper = new ModelMapper();
+        this.userRepository = userRepository;
     }
 
     public List<Post> getAll() {
@@ -43,6 +46,15 @@ public class PostCRUDService {
         } catch (Exception e){
             throw new ResourceNotFound("Error fetching profile!");
         }
+    }
+
+    public List<Post> fetchallByFollowing(String username) {
+        User user= userRepository.findUserByUsername(username);
+        List<Post> post = postRepository.fetchallByFollowing(user);
+
+        if(post.isEmpty()) { throw new ResourceNotFound("Error fetching post!"); }
+
+        return post;
     }
 
     public Optional<Post> getById(Long id) {
@@ -62,17 +74,16 @@ public class PostCRUDService {
 
     public void add(PostRequest content, String username) {
         log.info("fetching data....");
-        Optional<UserDTO> userdto = userCRUDService.getByUsername(username);
+        User user = userRepository.findUserByUsername(username);
 
         log.info("creating post....");
         Post post = new Post();
         post.setContent(content.getContent());
-        User user = new User();
-        BeanUtils.copyProperties(userdto.get(), user);
         post.setUser(user);
         post.setCreatedDate(utils.getDate());
 
         log.info("Saving post....");
         postRepository.save(post);
+        log.info("Post saved with success....");
     }
 }

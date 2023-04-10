@@ -19,4 +19,7 @@ public interface PostRepository extends IRepository<Post> {
     @Query(nativeQuery = true, value = "SELECT * FROM POST WHERE CONTENT like '%:label%'")
     List<Post> getByLabel(String label);
 
+    @Query(nativeQuery = true, value = "select post.* from post inner join connection c on c.following = post.tb_user_id where c.follower =:user")
+    List<Post> fetchallByFollowing(User user);
+
 }

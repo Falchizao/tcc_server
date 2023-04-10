@@ -32,6 +32,23 @@ public class PostController extends IController<PostResponse, ResponseEntity<?>,
         this.postCRUDService = postCRUDService;
     }
 
+    @PostMapping("/fetchByFollowing")
+    public ResponseEntity<List<PostResponse>> getAllByFollowing(Authentication authentication){
+        List<Post> posts = postCRUDService.fetchallByFollowing(authentication.getName());
+
+        if(posts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        List<PostResponse> response = posts.stream().map(postDTO -> PostResponse.builder()
+                .createdDate(postDTO.getCreatedDate())
+                .username(postDTO.getUser().getUsername())
+                .content(postDTO.getContent())
+                .build()).collect(Collectors.toList());
+
+        return new ResponseEntity<>(response,HttpStatus.CREATED);
+    }
+
     @Override
     public ResponseEntity<List<PostResponse>> getAll(HttpServletRequest httpServletRequest) {
         List<Post> posts = postCRUDService.getAll();
