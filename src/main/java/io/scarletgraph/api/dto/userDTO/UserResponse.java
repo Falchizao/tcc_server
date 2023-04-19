@@ -17,5 +17,6 @@ public class UserResponse implements Serializable {
     private Role role;
     private String description;
     private String location;
+    private String previousXp;
     private String email;
 }

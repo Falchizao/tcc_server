@@ -39,4 +39,8 @@ public class Profile extends IModel {
     @Getter
     @Setter
     private String location;
+
+    @Getter
+    @Setter
+    private String previousXP;
 }

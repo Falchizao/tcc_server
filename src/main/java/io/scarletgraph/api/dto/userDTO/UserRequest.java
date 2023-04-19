@@ -32,4 +32,7 @@ public class UserRequest {
 
     @Getter
     private String location;
+
+    @Getter
+    private String previousXP;
 }

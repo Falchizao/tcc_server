@@ -62,8 +62,10 @@ public class UserController extends IController<UserResponse, ResponseEntity<?>,
 
 
     @PostMapping("/findByUsername")
-    public ResponseEntity<User> getByUsername(@RequestParam(name = "name") String username) {
+    public ResponseEntity<User> getByUsername(@RequestParam(name = "name") String username, Authentication authentication) {
         User user = userCRUDService.getUserDetails(username);
+        user.setIsfollowing(userCRUDService.relationExists(authentication.getName(),username));
+
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

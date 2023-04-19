@@ -68,6 +68,10 @@ public class User extends IModel implements UserDetails   {
     @Column(name = "type")
     private Role role;
 
+    @Setter
+    @Getter
+    private Boolean isfollowing;
+
 
     @Getter
     @Setter
