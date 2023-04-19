@@ -1,6 +1,7 @@
 package io.scarletgraph.api.controller;
 
 import io.scarletgraph.api.domain.User;
+import io.scarletgraph.api.domain.social.ActionConnection;
 import io.scarletgraph.api.dto.userDTO.UserResponse;
 import io.scarletgraph.api.service.CRUD.UserCRUDService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,10 +30,17 @@ public class ConnectionController {
 
 
     @PostMapping("/follow")
-    public ResponseEntity<?> addConnection(@RequestParam(name = "name") String username, Authentication authentication){
-        userCRUDService.addConnection(username, authentication.getName());
+    public ResponseEntity<?> addConnection(@RequestParam(name = "name") String username, Authentication authentication, @RequestBody ActionConnection action){
 
-        log.info("now following");
+        if(action.getFollow()) {
+            userCRUDService.addConnection(username, authentication.getName());
+
+            log.info("now following");
+        } else {
+            userCRUDService.removeConnection(username, authentication.getName());
+
+            log.info("now unfollowing");
+        }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

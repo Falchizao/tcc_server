@@ -19,11 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Enumerated;
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -60,6 +62,25 @@ public class UserCRUDService extends IService<UserDTO> {
         return userRepository.findUserByUsername(username);
     }
 
+
+    public Boolean relationExists(String follower, String followed) {
+        Boolean relation = false;
+        try{
+            User followerUser = userRepository.findUserByUsername(follower);
+            User followedUser = userRepository.findUserByUsername(followed);
+
+            Optional<Connection> connection = connectionRepository.getConnection(followerUser.getId(), followedUser.getId());
+
+            if(!connection.isEmpty()) relation = true;
+
+        } catch (Exception e) {
+            relation = false;
+        }
+
+        return relation;
+
+    }
+
     @Override
     public Optional<UserDTO> getById(Long id) {
         log.info("Trying to find desired user...");
@@ -83,11 +104,31 @@ public class UserCRUDService extends IService<UserDTO> {
         }
     }
 
+    public void removeConnection(String connection_name, String username) {
+
+        try{
+            User following = userRepository.findUserByUsername(connection_name);
+            User follower = userRepository.findUserByUsername(username);
+
+            Optional<Connection> unfollowConnection = connectionRepository.getConnection(follower.getId(), following.getId());
+
+            if(!unfollowConnection.isEmpty()) {
+                connectionRepository.delete(unfollowConnection.get());
+            }
+
+
+        } catch (Exception e) {
+            throw new ResourceNotFound("Error fetching users details to make a new connection!");
+
+        }
+    }
+
 
     public UserResponse updateProfile(UserRequest model, String username) {
         User user = userRepository.findUserByUsername(username);
 
         user.getProfile().setDescription(model.getDescription());
+        user.getProfile().setPreviousXP(model.getPreviousXP());
         user.getProfile().setLocation(model.getLocation());
         user.setFirstName(model.getFirstName());
         user.setLastName(model.getLastName());
@@ -170,6 +211,7 @@ public class UserCRUDService extends IService<UserDTO> {
                 .email(user.getEmail())
                 .role(user.getRole())
                 .description(user.getProfile().getDescription())
+                .previousXp(user.getProfile().getPreviousXP())
                 .location(user.getProfile().getLocation()).build();
         return response;
     }
