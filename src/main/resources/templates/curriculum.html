@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Curriculum</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .previous-experiences {
+            margin-bottom: 20px;
+        }
+
+        .previous-experiences:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<h2>Curriculum</h2>
+
+<h2 th:text="${firstName + ' ' + lastName}"></h2>
+
+<h2>Contact Email</h2>
+<p><span th:text="${email}"></span></p>
+
+<h2>Contact Number</h2>
+<p><span th:text="${cellphone}"></span></p>
+
+<h2>Location</h2>
+<p><span th:text="${location}"></span></p>
+
+<h2>About</h2>
+<p><span th:text="${description}"></span></p>
+
+<h2>Previous Experiences</h2>
+<p><span th:text="${previousExperiences}"></span></p>
+</body>
+</html>
+

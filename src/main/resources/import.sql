@@ -2,7 +2,20 @@ insert into authority (authority) values ('ROLE_ADMIN');
 insert into authority (authority) values ('ROLE_CANDIDATE');
 insert into authority (authority) values ('ROLE_COMPANY');
 
-INSERT INTO profile(description) VALUES ('Me chamo Marcelo Falchi, sou o criador deste app, busco sempre novos conhecimentos e me aprofundar em novas tecnologias')
+
+@Getter
+@Setter
+    private String description;
+
+    @Getter
+@Setter
+    private String location;
+
+    @Getter
+@Setter
+    private String previousXP;
+}
+INSERT INTO profile(previousXP, location, description) VALUES ('Trabalhei 2 anos como desenvolvedor de software em Pato Branco - Parana','Sao Paulo - Brazil','Me chamo Marcelo Falchi, sou o criador deste app, busco sempre novos conhecimentos e me aprofundar em novas tecnologias')
 INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('marcelonavarro@gmail.com', 'Marcelo', 'Falchi', '$2a$10$lLPJdpiaK3AHpfklvkIa1.O93tRYQCVYbtlA3CUNdXpQNY8PGJnti', 1, 'falchi', 1)
 
 INSERT INTO profile(description) VALUES ('Hello there, my name is John, follow me for more content')
@@ -41,13 +54,15 @@ INSERT INTO TB_USER (email, first_name, last_name, password, type, username, pro
 INSERT INTO profile(description) VALUES ('Programador C#, amo ensinar novas pessoas!')
 INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('bueno@example.com', 'Victor', 'Bueno', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 2, 'victorbueno', 13);
 
-INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Programadora Delphi', 'Atenciosa, prestativa e gostar de trabalhar', now(), 8.48, 1800, 1);
-INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Programadora Java', 'Buscamos pessoas com facilidade de aprendizado', now(), 8, 5000, 2);
-INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Programadora Node JS', 'Deve-se conhecer bem node js', now(), 8, 4200, 3);
-INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Arquiteto Java', 'Microsservices e Kafka', now(), 8, 13500, 4);
-INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Estagio PHP', 'Composer e Fullstack', now(), 6, 1500, 5);
-INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Programadora Ruby', '+ de 3 anos de experiencia', now(), 8, 3200, 6);
-INSERT into offer (title, content, created_date, hours, salary, tb_user) VALUES ('Programadora Flutter', 'Getx e RiverPod', now(), 8, 4300, 7);
+
+
+INSERT into offer (title, content, created_date, hours, salary, location, requirements, remote, tb_user) VALUES ('Programadora Delphi', 'Atenciosa, prestativa e gostar de trabalhar', now(), 8.48, 1800,'BR - Rio de Janeiro - Copacabana' ,'Orientacao a objetos, solucao de problemas', false ,1);
+INSERT into offer (title, content, created_date, hours, salary, location, requirements, remote, tb_user) VALUES ('Programadora Java', 'Buscamos pessoas com facilidade de aprendizado', now(), 8, 5000,'BR - Sao Paulo - Santo Andre' ,'Facilidade de Aprendizado, Microservicos', true, 2);
+INSERT into offer (title, content, created_date, hours, salary, location, requirements, remote, tb_user) VALUES ('Programadora Node JS', 'Deve-se conhecer bem node js', now(), 8, 4200,'BR - Sao Paulo - Sao Bernardo' ,'Ecossistema JavaScript', false, 3);
+INSERT into offer (title, content, created_date, hours, salary, location, requirements, remote, tb_user) VALUES ('Arquiteto Java', 'Microsservices e Kafka', now(), 8, 13500,'BR - Parana - Pato Branco' ,'Escalabilidade de Servicos, Kafka, Spring-boot e Nginx', true, 4);
+INSERT into offer (title, content, created_date, hours, salary, location, requirements, remote, tb_user) VALUES ('Estagio PHP', 'Composer e Fullstack', now(), 6, 1500,'BR - Bahia - Salvador' ,'Conhecimentos em PHP', false, 5);
+INSERT into offer (title, content, created_date, hours, salary, location, requirements, remote, tb_user) VALUES ('Programadora Ruby', '+ de 3 anos de experiencia', now(), 8, 3200, 'BR - Bahia - Salvador' ,'Ruby, Orientacao a Objetos e JavaScript', true, 6);
+INSERT into offer (title, content, created_date, hours, salary, location, requirements, remote, tb_user) VALUES ('Programadora Flutter', 'Getx e RiverPod', now(), 8, 4300, 'BR - Parana - Curitiba' ,'Flutter, Contribuicoes em Open Source, Getx, Gerenciamento de Estado com RiverPod', false, 7);
 
 INSERT INTO post (content, created_date, tb_user_id) values ('Adoro essa plataforma!', now(), 1);
 INSERT INTO post (content, created_date, tb_user_id) values ('Aff, php ficou muito ruim', now(), 2);

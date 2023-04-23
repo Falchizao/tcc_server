@@ -1,5 +1,4 @@
 package io.scarletgraph.api.domain;
-
 import io.scarletgraph.api.generic.IModel;
 import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
