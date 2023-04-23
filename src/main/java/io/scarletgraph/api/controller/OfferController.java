@@ -34,6 +34,9 @@ public class OfferController {
         List<Offer> offers = offerCRUDService.findAll();
         List<OfferResponse> responses = offers.stream().map(offerDto -> OfferResponse.builder()
                 .id(offerDto.getId())
+                .location(offerDto.getLocation())
+                .remote(offerDto.getRemote())
+                .requirements(offerDto.getRequirements())
                 .content(offerDto.getContent())
                 .employer(offerDto.getEmployer().getUsername())
                 .hours(offerDto.getHours())
@@ -48,9 +51,18 @@ public class OfferController {
     public ResponseEntity<List<OfferResponse>> getAllByLabel(@RequestBody String label) {
         List<Offer> offers = offerCRUDService.findAllBylabel(label);
 
-        List<OfferResponse> response = offers.stream()
-                .map(offer -> modelMapper.map(offers, OfferResponse.class))
-                .collect(Collectors.toList());
+        List<OfferResponse> response = offers.stream().map(offerDto -> OfferResponse.builder()
+                .id(offerDto.getId())
+                .location(offerDto.getLocation())
+                .remote(offerDto.getRemote())
+                .requirements(offerDto.getRequirements())
+                .content(offerDto.getContent())
+                .employer(offerDto.getEmployer().getUsername())
+                .hours(offerDto.getHours())
+                .salary(offerDto.getSalary())
+                .createdDate(offerDto.getCreatedDate())
+                .title(offerDto.getTitle())
+                .build()).collect(Collectors.toList());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

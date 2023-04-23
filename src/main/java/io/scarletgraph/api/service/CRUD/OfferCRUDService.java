@@ -102,7 +102,10 @@ public class OfferCRUDService {
         offer.setTitle(request.getTitle());
         offer.setContent(request.getContent());
         offer.setEmployer(employer);
+        offer.setLocation(request.getLocation());
         offer.setCreatedDate(utils.getDate());
+        offer.setRemote(request.getRemote());
+        offer.setRequirements(request.getRequirements());
         log.info("Saving offer....");
         offerRepository.save(offer);
         log.info("Offer save with success....");

@@ -17,4 +17,7 @@ public class OfferResponse {
     private Double hours;
     private Date createdDate;
     private String title;
+    private String location;
+    private String requirements;
+    private Boolean remote;
 }

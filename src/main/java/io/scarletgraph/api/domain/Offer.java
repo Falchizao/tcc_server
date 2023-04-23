@@ -1,6 +1,7 @@
 package io.scarletgraph.api.domain;
 
 import io.scarletgraph.api.generic.IModel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -38,6 +39,21 @@ public class Offer extends IModel {
     @Setter
     @Getter
     private String title;
+
+    @NotBlank
+    @Setter
+    @Getter
+    private String location;
+
+    @NotBlank
+    @Setter
+    @Getter
+    private String requirements;
+
+    @NotNull
+    @Setter
+    @Getter
+    private Boolean remote;
 
     @OneToOne
     @JoinColumn(name="tb_user")

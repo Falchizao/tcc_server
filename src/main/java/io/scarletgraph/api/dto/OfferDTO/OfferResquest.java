@@ -20,5 +20,14 @@ public class OfferResquest {
 
     @NotNull(message = "Hours must not be null!")
     private Double hours;
+
+    @NotNull(message = "Location must not be null!")
+    private String location;
+
+    @NotNull(message = "Requirements must not be null!")
+    private String requirements;
+
+    @NotNull(message = "Accepts-Remote must not be null!")
+    private Boolean remote;
 }
 

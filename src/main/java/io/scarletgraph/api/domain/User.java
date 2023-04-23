@@ -10,10 +10,8 @@ import javax.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 @Entity(name = "tb_user")
 @Table(uniqueConstraints = {
@@ -40,6 +38,8 @@ public class User extends IModel implements UserDetails   {
     String email;
 
     @Column(name = "cellphone", length = 20)
+    @Getter
+    @Setter
     @Size(max = 20, message = "Invalid cellphone number, please verify!")
     private String cellphone;
 
