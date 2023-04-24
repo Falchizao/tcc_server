@@ -57,6 +57,23 @@ public class OfferCRUDService {
         return offerRepository.findAll();
     }
 
+    public List<Offer> findAllByCandidate(String username) {
+
+        User user = userRepository.findUserByUsername(username);
+
+        return offerRepository.findAllByCandidate(user.getId());
+    }
+
+    public List<Offer> findAllByCompany(String username) {
+
+        User user = userRepository.findUserByUsername(username);
+
+        return offerRepository.findByUser(user.getId());
+    }
+
+
+
+
     public void applyToOffer(Long offerID, String employer_name) {
         User user = userRepository.findUserByUsername(employer_name);
         Optional<Offer> offer = offerRepository.findById(offerID);

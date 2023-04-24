@@ -2,21 +2,8 @@ insert into authority (authority) values ('ROLE_ADMIN');
 insert into authority (authority) values ('ROLE_CANDIDATE');
 insert into authority (authority) values ('ROLE_COMPANY');
 
-
-@Getter
-@Setter
-    private String description;
-
-    @Getter
-@Setter
-    private String location;
-
-    @Getter
-@Setter
-    private String previousXP;
-}
 INSERT INTO profile(previousXP, location, description) VALUES ('Trabalhei 2 anos como desenvolvedor de software em Pato Branco - Parana','Sao Paulo - Brazil','Me chamo Marcelo Falchi, sou o criador deste app, busco sempre novos conhecimentos e me aprofundar em novas tecnologias')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('marcelonavarro@gmail.com', 'Marcelo', 'Falchi', '$2a$10$lLPJdpiaK3AHpfklvkIa1.O93tRYQCVYbtlA3CUNdXpQNY8PGJnti', 1, 'falchi', 1)
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('marcelonavarro@gmail.com', 'Marcelo', 'Falchi', '$2a$10$lLPJdpiaK3AHpfklvkIa1.O93tRYQCVYbtlA3CUNdXpQNY8PGJnti', 1, 'falchi', 1);
 
 INSERT INTO profile(description) VALUES ('Hello there, my name is John, follow me for more content')
 INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('johndoe@example.com', 'Lary', 'Doe', '$2a$10$Tb85oR8uoEa1e36EGhCJ6OMyMQs9EdW6DNv3J15hERbTgT8RnlW1a', 1, 'larydoe', 2);
@@ -28,31 +15,35 @@ INSERT INTO profile(description) VALUES ('Whats up people, my name is Robert, fo
 INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('robertjones@example.com', 'Roberta', 'Jones', '$2a$10$W2u3il.3MEU6KzHMuUnsW.X9k43dHKPiA6fZT6TJW8xw26B1AlY0a', 1, 'robertajones', 4);
 
 INSERT INTO profile(description) VALUES ('My name is Sarah, follow for more content')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('sarahlee@example.com', 'Sarah', 'Lee', '$2a$10$w4bUHhyjA10.6UVs9Bq3SO6jKm6TmT3q9XZ.vtH4a4zKgRlCXxoE.', 2, 'sarahlee', 5);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('sarahlee@example.com', 'Sarah', 'Lee', '$2a$10$w4bUHhyjA10.6UVs9Bq3SO6jKm6TmT3q9XZ.vtH4a4zKgRlCXxoE.', 1, 'sarahlee', 5);
 
 INSERT INTO profile(description) VALUES ('Senior software Eng, like to post about anything')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('michaelbrown@example.com', 'Michaela', 'Brown', '$2a$10$iCwzF50mt0jKzwfsLGxS0.4ukdK2N3X9gxIKDRtET4fH/0/XRzgmy', 2, 'michaelabrown', 6);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('michaelbrown@example.com', 'Michaela', 'Brown', '$2a$10$iCwzF50mt0jKzwfsLGxS0.4ukdK2N3X9gxIKDRtET4fH/0/XRzgmy', 1, 'michaelabrown', 6);
 
 INSERT INTO profile(description) VALUES ('What`s up recruiters, my name is emily and i`m a 20yo software developer')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('emilynguyen@example.com', 'Emily', 'Nguyen', '$2a$10$JY8llvzU91AOSpVl/DHMH.NXlrgcFlKbsh27rkQzZ38fYdL26jF8S', 2, 'emilynguyen', 7);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('emilynguyen@example.com', 'Emily', 'Nguyen', '$2a$10$JY8llvzU91AOSpVl/DHMH.NXlrgcFlKbsh27rkQzZ38fYdL26jF8S', 1, 'emilynguyen', 7);
 
 INSERT INTO profile(description) VALUES ('My name is david and i love to play games')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('davidsmith@example.com', 'Samara', 'Smith', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 2, 'samarasmith', 8);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('davidsmith@example.com', 'Samara', 'Smith', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 1, 'samarasmith', 8);
 
 INSERT INTO profile(description) VALUES ('Me chamo ronald, sou recrutador da empresa XX, fique por dentro de novas vagas clicando no botao de seguir')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('ronald@example.com', 'Ronald', 'Black', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 2, 'ronaldblack', 9);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('ronald@example.com', 'Ronald', 'Black', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 0, 'ronaldblack', 9);
 
 INSERT INTO profile(description) VALUES ('Me chamo vitor, adoro ler e comentar sobre programacao, se for de seu interesse, me siga para mais informacoes')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('victor@example.com', 'Victor', 'Santana', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 2, 'victorsantana', 10);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('victor@example.com', 'Victor', 'Santana', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 0, 'victorsantana', 10);
 
 INSERT INTO profile(description) VALUES ('Professor Universitario, programador fullstack e amo jogos virtuais')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('pegorini@example.com', 'Vinicius', 'Pegorini', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 2, 'vinipegorini', 11);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('pegorini@example.com', 'Vinicius', 'Pegorini', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 0, 'vinipegorini', 11);
 
 INSERT INTO profile(description) VALUES ('Professora Universitaria, com muita vontade de ensinar!')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('soelaine@example.com', 'Gabrielle', 'Soelaine', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 2, 'soelaine', 12);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('soelaine@example.com', 'Gabrielle', 'Soelaine', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 1, 'soelaine', 12);
 
 INSERT INTO profile(description) VALUES ('Programador C#, amo ensinar novas pessoas!')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('bueno@example.com', 'Victor', 'Bueno', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 2, 'victorbueno', 13);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('bueno@example.com', 'Victor', 'Bueno', '$2a$10$hE2hBzUNOzN41yf25hJfAOE7i8Mk5p5ZK/6/hzUwOY8HzGJPPKjy2', 0, 'victorbueno', 13);
+
+INSERT INTO profile(previousXP, location, description) VALUES ('Teste','Teste','Teste')
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('company@gmail.com', 'Company', 'Company', '$2a$10$lLPJdpiaK3AHpfklvkIa1.O93tRYQCVYbtlA3CUNdXpQNY8PGJnti', 0, 'Company', 14);
+
 
 
 

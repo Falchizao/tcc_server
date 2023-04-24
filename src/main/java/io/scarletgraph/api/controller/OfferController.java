@@ -87,6 +87,47 @@ public class OfferController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+
+    @PostMapping("/all")
+    public ResponseEntity<List<OfferResponse>> appliedJob(Authentication authentication){
+        List<Offer> offers = offerCRUDService.findAllByCandidate(authentication.getName());
+
+        List<OfferResponse> response = offers.stream().map(offerDto -> OfferResponse.builder()
+                .id(offerDto.getId())
+                .location(offerDto.getLocation())
+                .remote(offerDto.getRemote())
+                .requirements(offerDto.getRequirements())
+                .content(offerDto.getContent())
+                .employer(offerDto.getEmployer().getUsername())
+                .hours(offerDto.getHours())
+                .salary(offerDto.getSalary())
+                .createdDate(offerDto.getCreatedDate())
+                .title(offerDto.getTitle())
+                .build()).collect(Collectors.toList());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/myoffers")
+    public ResponseEntity<List<OfferResponse>> fetchUserOffers(Authentication authentication){
+        List<Offer> offers = offerCRUDService.findAllByCompany(authentication.getName());
+
+        List<OfferResponse> response = offers.stream().map(offerDto -> OfferResponse.builder()
+                .id(offerDto.getId())
+                .location(offerDto.getLocation())
+                .remote(offerDto.getRemote())
+                .requirements(offerDto.getRequirements())
+                .content(offerDto.getContent())
+                .employer(offerDto.getEmployer().getUsername())
+                .hours(offerDto.getHours())
+                .salary(offerDto.getSalary())
+                .createdDate(offerDto.getCreatedDate())
+                .title(offerDto.getTitle())
+                .build()).collect(Collectors.toList());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     public ResponseEntity<?> delete(Long id) {
         return null;
     }
