@@ -1,6 +1,7 @@
 package io.scarletgraph.api.controller;
 
 import io.scarletgraph.api.domain.Offer;
+import io.scarletgraph.api.dto.OfferDTO.OfferFilterRequest;
 import io.scarletgraph.api.dto.OfferDTO.OfferResponse;
 import io.scarletgraph.api.dto.OfferDTO.OfferResquest;
 import io.scarletgraph.api.dto.postDTO.PostRequest;
@@ -48,6 +49,26 @@ public class OfferController {
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
+
+    @GetMapping("/Recommended")
+    public ResponseEntity<List<OfferResponse>> getRecommendedAll() {
+        List<Offer> offers = offerCRUDService.findRecommendedAll();
+        List<OfferResponse> responses = offers.stream().map(offerDto -> OfferResponse.builder()
+                .id(offerDto.getId())
+                .location(offerDto.getLocation())
+                .remote(offerDto.getRemote())
+                .requirements(offerDto.getRequirements())
+                .content(offerDto.getContent())
+                .employer(offerDto.getEmployer().getUsername())
+                .hours(offerDto.getHours())
+                .salary(offerDto.getSalary())
+                .createdDate(offerDto.getCreatedDate())
+                .title(offerDto.getTitle())
+                .build()).collect(Collectors.toList());
+
+        return new ResponseEntity<>(responses, HttpStatus.OK);
+    }
+
     public ResponseEntity<List<OfferResponse>> getAllByLabel(@RequestBody String label) {
         List<Offer> offers = offerCRUDService.findAllBylabel(label);
 
@@ -79,6 +100,32 @@ public class OfferController {
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+
+    @PostMapping("filter")
+    public ResponseEntity<List<OfferResponse>> fetchOfferByFilter(@RequestBody OfferFilterRequest filter) {
+        List<Offer> offers = offerCRUDService.filterOffer(filter.getLabel(), filter.getType(), filter.getRemote());
+
+        List<OfferResponse> response = offers.stream().map(offerDto -> OfferResponse.builder()
+                .id(offerDto.getId())
+                .location(offerDto.getLocation())
+                .remote(offerDto.getRemote())
+                .requirements(offerDto.getRequirements())
+                .content(offerDto.getContent())
+                .employer(offerDto.getEmployer().getUsername())
+                .hours(offerDto.getHours())
+                .salary(offerDto.getSalary())
+                .createdDate(offerDto.getCreatedDate())
+                .title(offerDto.getTitle())
+                .build()).collect(Collectors.toList());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+
+
+
 
     @PostMapping("/apply")
     public ResponseEntity<PostResponse> addOffer(@RequestParam(name = "id") Long id, Authentication authentication){
@@ -128,8 +175,11 @@ public class OfferController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> delete(Long id) {
-        return null;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        offerCRUDService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     public ResponseEntity<PostResponse> update(PostRequest model, Long id) {
