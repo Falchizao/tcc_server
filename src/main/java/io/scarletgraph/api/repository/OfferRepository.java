@@ -13,7 +13,6 @@ public interface OfferRepository extends IRepository<Offer> {
 
     Optional<Offer> findById(Long id);
 
-
     @Query(nativeQuery = true, value = "select * from offer where content like '%:label%'")
     List<Offer> findAllByLabel(String label);
 
@@ -23,5 +22,12 @@ public interface OfferRepository extends IRepository<Offer> {
     @Query(nativeQuery = true, value = "select * from offer where tb_user =:company_id")
     List<Offer> findByUser(Long company_id);
 
+    @Query(nativeQuery = true, value = "select * from offer order by id desc limit 4 ")
+    List<Offer> findRecommendedAll();
 
+    @Query(nativeQuery = true, value = "select * from offer where remote=:remote and hours > 6 and requirements ilike CONCAT('%',:label,'%') OR location ilike CONCAT('%',:label,'%') OR content ilike CONCAT('%',:label,'%') OR title ilike CONCAT('%',:label,'%')")
+    List<Offer> filterFulltimeOffer(String label, Boolean remote);
+
+    @Query(nativeQuery = true, value = "select * from offer where remote=:remote and hours <= 6 and requirements ilike CONCAT('%',:label,'%') OR location ilike CONCAT('%',:label,'%') OR content ilike CONCAT('%',:label,'%') OR title ilike CONCAT('%',:label,'%')")
+    List<Offer> filterHalfTimeOffer(String label, Boolean remote);
 }
