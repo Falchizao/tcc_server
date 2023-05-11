@@ -57,6 +57,25 @@ public class OfferCRUDService {
         return offerRepository.findAll();
     }
 
+    public List<Offer> filterOffer(String label, Boolean type, Boolean remote) {
+
+        try {
+            if(type) {
+                return offerRepository.filterFulltimeOffer(label, remote);
+            } else {
+                return offerRepository.filterHalfTimeOffer(label, remote);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new ResourceNotFound("Error fetching offer!");
+        }
+
+    }
+
+    public List<Offer> findRecommendedAll() {
+        return offerRepository.findRecommendedAll();
+    }
+
     public List<Offer> findAllByCandidate(String username) {
 
         User user = userRepository.findUserByUsername(username);
@@ -70,9 +89,6 @@ public class OfferCRUDService {
 
         return offerRepository.findByUser(user.getId());
     }
-
-
-
 
     public void applyToOffer(Long offerID, String employer_name) {
         User user = userRepository.findUserByUsername(employer_name);
@@ -91,6 +107,17 @@ public class OfferCRUDService {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public void delete(Long id) {
+        Optional<Offer> offer = offerRepository.findById(id);
+
+        if(offer.isEmpty()){
+            throw new ResourceNotFound("Offer by id not found!");
+        }
+        log.info("Deleting offer...");
+
+        offerRepository.delete(offer.get());
     }
 
     public List<Offer> findAllBylabel(final String label) {
