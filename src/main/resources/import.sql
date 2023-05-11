@@ -3,7 +3,7 @@ insert into authority (authority) values ('ROLE_CANDIDATE');
 insert into authority (authority) values ('ROLE_COMPANY');
 
 INSERT INTO profile(previousXP, location, description) VALUES ('Trabalhei 2 anos como desenvolvedor de software em Pato Branco - Parana','Sao Paulo - Brazil','Me chamo Marcelo Falchi, sou o criador deste app, busco sempre novos conhecimentos e me aprofundar em novas tecnologias')
-INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('marcelonavarro@gmail.com', 'Marcelo', 'Falchi', '$2a$10$lLPJdpiaK3AHpfklvkIa1.O93tRYQCVYbtlA3CUNdXpQNY8PGJnti', 1, 'falchi', 1);
+INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('marcelonavarro11md@gmail.com', 'Marcelo', 'Falchi', '$2a$10$lLPJdpiaK3AHpfklvkIa1.O93tRYQCVYbtlA3CUNdXpQNY8PGJnti', 1, 'falchi', 1);
 
 INSERT INTO profile(description) VALUES ('Hello there, my name is John, follow me for more content')
 INSERT INTO TB_USER (email, first_name, last_name, password, type, username, profile_id) VALUES ('johndoe@example.com', 'Lary', 'Doe', '$2a$10$Tb85oR8uoEa1e36EGhCJ6OMyMQs9EdW6DNv3J15hERbTgT8RnlW1a', 1, 'larydoe', 2);
